@@ -139,6 +139,21 @@
   color: white;
 }
 
+.dropdown-menu-dark{
+  background-color: rgba(0, 0, 0, 0.466);
+  border-radius: 10px;
+}
+
+.dropdown-menu-dark .dropdown-item{
+  color: white;
+}
+
+.dropdown-menu-dark .dropdown-item:hover{
+  background-color: #64a19d;
+  color: white;
+}
+
+
 .listaEnlaces{
   list-style: none;   
   padding: 0;         
@@ -285,4 +300,4 @@
     font-size:26px;
     color:black;
 }
-    
+
