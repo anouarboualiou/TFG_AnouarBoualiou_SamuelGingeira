@@ -1,36 +1,38 @@
-
 window.addEventListener('DOMContentLoaded', event => {
 
-    let reducNavbar = function () {
-        const navbarCollapsable = document.body.querySelector('#mainNav');
-        if (!navbarCollapsable) {
-            return;
+    const navbar = document.querySelector('#mainNav');
+
+    function handleNavbarScroll() {
+        if (!navbar) return;
+
+        // 🔑 SOLO aplicar efecto si es la home
+        if (navbar.classList.contains('navbar-home')) {
+            if (window.scrollY === 0) {
+                navbar.classList.remove('navbar-scrolled');
+            } else {
+                navbar.classList.add('navbar-scrolled');
+            }
         }
-        if (window.scrollY === 0) {
-            navbarCollapsable.classList.remove('navbar-shrink')
-        } else {
-            navbarCollapsable.classList.add('navbar-shrink')
-        }
+    }
 
-    };
+    handleNavbarScroll();
+    document.addEventListener('scroll', handleNavbarScroll);
 
-    reducNavbar();
-
-    document.addEventListener('scroll', reducNavbar);
-
-    const navPrincipal = document.body.querySelector('#mainNav');
-    if (navPrincipal) {
+    // ScrollSpy
+    if (navbar) {
         new bootstrap.ScrollSpy(document.body, {
             target: '#mainNav',
             rootMargin: '0px 0px -40%',
         });
-    };
+    }
 
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
+    // Cerrar menú en móvil
+    const navbarToggler = document.querySelector('.navbar-toggler');
     const navItems = [].slice.call(
         document.querySelectorAll('#navbarResponsive .nav-link')
     );
-    navItems.map(item=> {
+
+    navItems.map(item => {
         item.addEventListener('click', () => {
             if (window.getComputedStyle(navbarToggler).display !== 'none') {
                 navbarToggler.click();
