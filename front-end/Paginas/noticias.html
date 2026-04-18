@@ -286,13 +286,13 @@
 
             const res = await fetch(url)
 
-            const noticias = await res.json()
+            const data = await res.json()
 
-            const contenedor = document.getElementById("listaNoticias")
+            const lista = document.getElementById("listaNoticias")
 
             contenedor.innerHTML = ""
 
-            noticias.forEach(n => {
+            data.forEach(n => {
 
                 contenedor.innerHTML += `
 
