@@ -35,31 +35,23 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 col-lg-4">
 
-                        <form class="form-login">
+                        <form class="form-login" id="loginForm">
 
                             <h3 class="text-center mb-4">Iniciar sesión</h3>
 
                             <div class="mb-3">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control">
+                                <input type="email" id="email" class="form-control">
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Contraseña</label>
-                                <input type="password" class="form-control">
+                                <input type="password" id="password" class="form-control">
                             </div>
 
-                            <a href="./dashboard.html" class="btn btn-primary w-100">
+                            <button type="submit" class="btn btn-primary w-100 mt-3">
                                 Iniciar sesión
-                            </a>
-
-                            <div class="mt-3 text-center">
-                                <p>¿No tienes cuenta?
-                                    <a href="./registroSesion.html" class="text-decoration-none">
-                                        Regístrate
-                                    </a>
-                                </p>
-                            </div>
+                            </button>
 
                         </form>
 
@@ -149,5 +141,7 @@
     </footer>
 
 </body>
+
+<script src="../scripts/Login/login.js"></script>
 
 </html>
