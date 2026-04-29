@@ -1,4 +1,4 @@
-const db = require('../db/conexion')
+const authModel = require('./auth.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -7,25 +7,26 @@ function login(req, res){
 
     const {email, password} = req.body 
     
-    const sql = `SELECT * FROM USUARIO WHERE email = ?`
-
-    db.query(sql, [email], async (err, result) => {
+    authModel.getUserByEmail(email, async (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
         }
 
-        if(result.length === 0){
+        if (result.length === 0) {
             return res.status(401).json({
                 message: 'Credenciales incorrectas'
             })
         }
 
-        const usuario = result[0]
+        const usuario = result[0];
 
-        const passwordMatch = await bcrypt.compare(password, usuario.password_hash)
+        const passwordMatch = await bcrypt.compare(
+            password,
+            usuario.password_hash
+        )
 
-        if(!passwordMatch){
+        if (!passwordMatch) {
             return res.status(401).json({
                 message: 'Credenciales incorrectas'
             })
@@ -47,7 +48,6 @@ function login(req, res){
             token
         })
     })
-
 }
 
 function me(req, res){

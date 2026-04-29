@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const equiposController = require('./equipos.controller')
-const verifyToken = require('../auth/auth.middleware')
+const verifyToken = require('../middleware/auth.middleware')
 
 
 router.get('/', equiposController.getEquipos)
