@@ -1,8 +1,8 @@
-const entrenamientoModel = require('./entrenamientos.model');
+const entrenadorModel = require('./entrenadores.model');
 
-function getEntrenamientos(req, res) {
+function getEntrenadores(req, res) {
 
-    entrenamientoModel.getAll((err, result) => {
+    entrenadorModel.getAll((err, result) => {
 
         if (err) {
             return res.status(500).json(err);
@@ -12,11 +12,11 @@ function getEntrenamientos(req, res) {
     });
 }
 
-function getEntrenamientoById(req, res) {
+function getEntrenadorById(req, res) {
 
     const { id } = req.params;
 
-    entrenamientoModel.getById(id, (err, result) => {
+    entrenadorModel.getById(id, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
@@ -24,7 +24,7 @@ function getEntrenamientoById(req, res) {
 
         if (result.length === 0) {
             return res.status(404).json({
-                message: 'Entrenamiento no encontrado'
+                message: 'Entrenador no encontrado'
             });
         }
 
@@ -32,26 +32,26 @@ function getEntrenamientoById(req, res) {
     });
 }
 
-function createEntrenamiento(req, res) {
+function createEntrenador(req, res) {
 
-    entrenamientoModel.create(req.body, (err, result) => {
+    entrenadorModel.create(req.body, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
         }
 
         res.status(201).json({
-            message: 'Entrenamiento creado',
+            message: 'Entrenador creado',
             id: result.insertId
         });
     });
 }
 
-function updateEntrenamiento(req, res) {
+function updateEntrenador(req, res) {
 
     const { id } = req.params;
 
-    entrenamientoModel.update(id, req.body, (err, result) => {
+    entrenadorModel.update(id, req.body, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
@@ -59,21 +59,21 @@ function updateEntrenamiento(req, res) {
 
         if (result.affectedRows === 0) {
             return res.status(404).json({
-                message: 'Entrenamiento no encontrado'
+                message: 'Entrenador no encontrado'
             });
         }
 
         res.json({
-            message: 'Entrenamiento actualizado'
+            message: 'Entrenador actualizado'
         });
     });
 }
 
-function deleteEntrenamiento(req, res) {
+function deleteEntrenador(req, res) {
 
     const { id } = req.params;
 
-    entrenamientoModel.remove(id, (err, result) => {
+    entrenadorModel.remove(id, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
@@ -81,20 +81,20 @@ function deleteEntrenamiento(req, res) {
 
         if (result.affectedRows === 0) {
             return res.status(404).json({
-                message: 'Entrenamiento no encontrado'
+                message: 'Entrenador no encontrado'
             });
         }
 
         res.json({
-            message: 'Entrenamiento eliminado'
+            message: 'Entrenador eliminado'
         });
     });
 }
 
 module.exports = {
-    getEntrenamientos,
-    getEntrenamientoById,
-    createEntrenamiento,
-    updateEntrenamiento,
-    deleteEntrenamiento
+    getEntrenadores,
+    getEntrenadorById,
+    createEntrenador,
+    updateEntrenador,
+    deleteEntrenador
 };
