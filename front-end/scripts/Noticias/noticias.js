@@ -124,8 +124,12 @@ async function cargarNoticias() {
 
                 </div>
 
-                <a href="#" class="btn btn-primary btn-article">
+                <a 
+                    href="/noticias/${n.id_noticia}"
+                    class="btn btn-primary btn-article">
+
                     Leer más
+
                 </a>
 
             </div>

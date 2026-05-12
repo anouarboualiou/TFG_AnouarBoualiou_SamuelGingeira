@@ -39,8 +39,13 @@ function getByEquipo(equipo, callback) {
 function getById(id, callback) {
 
     const sql = `
-        SELECT * FROM NOTICIA
-        WHERE id_noticia = ?
+        SELECT 
+            n.*,
+            e.nombre AS nombre_equipo
+        FROM NOTICIA n
+        INNER JOIN EQUIPO e
+            ON n.id_equipo = e.id_equipo
+        WHERE n.id_noticia = ?
     `;
 
     db.query(sql, [id], callback);
@@ -51,6 +56,7 @@ function create(data, callback) {
     const sql = `
         INSERT INTO NOTICIA (
             titulo,
+            subtitulo,
             descripcion,
             fecha_pub,
             foto_noticia,
@@ -62,6 +68,7 @@ function create(data, callback) {
     db.query(sql, [
 
         data.titulo,
+        data.subtitulo,
         data.descripcion,
         data.fecha_pub,
         data.foto_noticia,
@@ -77,6 +84,7 @@ function update(id, data, callback) {
         UPDATE NOTICIA
         SET
             titulo = ?,
+            subtitulo = ?,
             descripcion = ?,
             fecha_pub = ?,
             foto_noticia = ?,
@@ -84,7 +92,7 @@ function update(id, data, callback) {
         WHERE id_noticia = ?
     `;
 
-    db.query(sql, [data.titulo, data.descripcion, data.fecha_pub, data.foto_noticia, data.id_equipo, id], callback);
+    db.query(sql, [data.titulo, data.subtitulo, data.descripcion, data.fecha_pub, data.foto_noticia, data.id_equipo, id], callback);
 }
 
 function remove(id, callback) {

@@ -3,7 +3,7 @@ require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
-const path = require('path') // 👈 AÑADIR
+const path = require('path') 
 
 const app = express()
 
@@ -45,6 +45,19 @@ app.get('/partidos', (req, res) => {
 
 app.get('/noticias', (req, res) => {
     res.sendFile(path.join(__dirname, '../front-end/Paginas/noticias.html'));
+});
+
+app.get('/noticias/:id', (req, res) => {
+
+    res.sendFile(
+
+        path.join(
+            __dirname,
+            '../front-end/Paginas/noticiaDetalle.html'
+        )
+
+    );
+
 });
 
 // API

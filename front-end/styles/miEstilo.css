@@ -102,6 +102,16 @@
   margin-bottom: 12px;
 }
 
+.subtitulo-noticia {
+
+    color: #6c757d;
+
+    font-size: 0.95rem;
+
+    margin-bottom: 10px;
+
+}
+
 .texto-noticia {
   color: #6c757d;
   margin-bottom: 15px;
@@ -522,5 +532,184 @@ body {
     min-height: 75px;
 
     word-break: break-word;
+
+}
+
+.noticia-detalle-img {
+
+  width: 100%;
+
+  height: 500px;
+
+  object-fit: cover;
+
+  object-position: center;
+
+  border-radius: 20px;
+
+  display: block;
+
+}
+
+
+
+.contenido-detalle-noticia {
+
+    font-size: 1.1rem;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+
+}
+
+.noticia-detalle-container {
+
+    padding-top: 140px;
+    padding-bottom: 100px;
+
+}
+
+.detalle-noticia-card {
+
+  background: #fff;
+  padding: 30px;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+.detalle-noticia-body {
+
+  padding-top: 30px;
+
+}
+
+
+.categoria-detalle {
+
+    font-size: 0.9rem;
+
+    padding: 10px 16px;
+
+    border-radius: 10px;
+
+}
+
+
+.titulo-detalle-noticia {
+
+    font-size: 2.8rem;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+    line-height: 1.2;
+
+    word-break: break-word;
+
+    overflow-wrap: break-word;
+
+}
+
+
+.subtitulo-detalle-noticia {
+
+    color: #6c757d;
+
+    margin-bottom: 30px;
+
+    line-height: 1.5;
+    word-break: break-word;
+
+    overflow-wrap: break-word;
+
+}
+
+
+.meta-detalle-noticia {
+
+    margin-bottom: 35px;
+
+    color: #777;
+
+    font-size: 0.95rem;
+
+}
+
+
+.contenido-detalle-noticia {
+
+    font-size: 1.1rem;
+
+    line-height: 2;
+
+    color: #444;
+
+    white-space: pre-line;
+    word-break: break-word;
+
+    overflow-wrap: break-word;
+}
+
+
+@media (max-width: 768px) {
+
+    .noticia-detalle-container {
+
+        padding-top: 110px;
+
+    }
+
+
+    .detalle-noticia-body {
+
+        padding: 25px;
+
+    }
+
+
+    .titulo-detalle-noticia {
+
+        font-size: 2rem;
+
+    }
+
+
+    .subtitulo-detalle-noticia {
+
+        font-size: 1.1rem;
+
+    }
+
+
+ .noticia-detalle-img {
+
+    width: auto !important;
+
+    max-width: calc(100% - 50px);
+
+    height: 500px;
+
+    object-fit: cover;
+
+    margin: 25px auto;
+
+    border-radius: 20px;
+
+    display: block;
+
+}
+
+    .contenido-detalle-noticia {
+
+        font-size: 1rem;
+
+        line-height: 1.8;
+
+    }
 
 }

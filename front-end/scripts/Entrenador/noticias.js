@@ -76,6 +76,13 @@ function renderNoticias(noticias){
 
                         </h5>
 
+
+                        <h6 class="subtitulo-noticia">
+
+                            ${noticia.subtitulo || ''}
+
+                        </h6>
+
                         <div class="info-noticia">
 
                             <span>
@@ -169,6 +176,19 @@ function abrirModalCrearNoticia(){
                 <div class="mb-3">
 
                     <label class="form-label">
+                        Subtítulo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subtituloNoticia"
+                        class="form-control">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
                         Descripción
                     </label>
 
@@ -240,6 +260,10 @@ async function guardarNoticia(){
                 'tituloNoticia'
             ).value,
 
+        subtitulo:
+            document.getElementById(
+                'subtituloNoticia'
+            ).value,
         descripcion:
             document.getElementById(
                 'descripcionNoticia'
@@ -370,6 +394,20 @@ function abrirModalEditarNoticia(idNoticia){
                 <div class="mb-3">
 
                     <label class="form-label">
+                        Subtítulo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editSubtituloNoticia"
+                        class="form-control"
+                        value="${noticia.subtitulo || ''}">
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
                         Descripción
                     </label>
 
@@ -441,6 +479,11 @@ async function actualizarNoticia(idNoticia){
             document.getElementById(
                 'editTituloNoticia'
             ).value,
+
+            subtitulo:
+                document.getElementById(
+                    'editSubtituloNoticia'
+                ).value,
 
         descripcion:
             document.getElementById(
