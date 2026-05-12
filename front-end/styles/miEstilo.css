@@ -223,7 +223,26 @@
   font-weight: 600;
 }
 
+.estado-partido {
+
+    position: absolute;
+
+    top: 15px;
+
+    right: 15px;
+
+    padding: 8px 12px;
+
+    border-radius: 10px;
+
+    font-size: 0.8rem;
+
+    z-index: 2;
+
+}
+
 .encabezado-partido {
+  position: relative;
   height: 120px;
   /* altura del header */
   display: flex;

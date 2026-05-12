@@ -7,6 +7,57 @@ function getAll(callback) {
     db.query(sql, callback);
 }
 
+function getByFiltros(equipo, estado, callback) {
+
+    let sql = `
+        SELECT 
+            p.*,
+            e.nombre AS nombre_equipo,
+            e.campo AS campo_equipo
+        FROM PARTIDO p
+        INNER JOIN EQUIPO e
+            ON p.id_equipo = e.id_equipo
+    `;
+
+    const params = [];
+
+    const condiciones = [];
+
+
+
+    if (equipo) {
+
+        condiciones.push(`p.id_equipo = ?`);
+        params.push(equipo);
+
+    }
+
+
+
+    if (estado) {
+
+        condiciones.push(`p.estado = ?`);
+        params.push(estado);
+
+    }
+
+
+
+    if (condiciones.length > 0) {
+
+        sql += ` WHERE ` + condiciones.join(' AND ');
+
+    }
+
+
+
+    db.query(sql, params, callback);
+
+}
+
+
+
+
 function getById(id, callback) {
 
     const sql = `
@@ -116,6 +167,7 @@ function remove(id, callback) {
 }
 
 module.exports = {
+    getByFiltros,
     getAll,
     getById,
     create,

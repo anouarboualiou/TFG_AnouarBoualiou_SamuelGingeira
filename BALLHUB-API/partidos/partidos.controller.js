@@ -1,15 +1,28 @@
 const partidoModel = require('./partidos.model')
 
-function getPartidos(req, res){
+function getPartidos(req, res) {
 
-    partidoModel.getAll((err, result) => {
+    const { equipo, estado } = req.query;
 
-        if (err) {
-            return res.status(500).json(err);
+    partidoModel.getByFiltros(
+
+        equipo || null,
+        estado || null,
+
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json(err);
+
+            }
+
+            res.json(result);
+
         }
 
-        res.json(result)
-    })
+    );
+
 }
 
 function getPartidoById(req, res){
