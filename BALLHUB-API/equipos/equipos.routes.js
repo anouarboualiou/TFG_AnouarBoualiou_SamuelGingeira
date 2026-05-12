@@ -4,13 +4,14 @@ const router = express.Router()
 
 const equiposController = require('./equipos.controller')
 const verifyToken = require('../middleware/auth.middleware')
-
+const checkRole = require('../middleware/role.middleware')
 
 router.get('/', equiposController.getEquipos)
 router.get('/:id', equiposController.getEquipoById)
-router.post('/', verifyToken, equiposController.createEquipo)
-router.put('/:id', verifyToken, equiposController.updateEquipo)
-router.delete('/:id', verifyToken, equiposController.deleteEquipo)
+
+router.post('/', verifyToken, checkRole('superadmin'), equiposController.createEquipo)
+router.put('/:id', verifyToken, checkRole('superadmin'), equiposController.updateEquipo)
+router.delete('/:id', verifyToken, checkRole('superadmin'), equiposController.deleteEquipo)
 
 
 module.exports = router

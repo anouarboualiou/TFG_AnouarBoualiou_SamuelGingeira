@@ -4,11 +4,14 @@ const router = express.Router();
 const entrenamientosController = require('./entrenamientos.controller');
 const verifyToken = require('../middleware/auth.middleware');
 
-router.get('/', entrenamientosController.getEntrenamientos);
-router.get('/:id', entrenamientosController.getEntrenamientoById);
+const checkRole = require('../middleware/role.middleware')
 
-router.post('/', verifyToken, entrenamientosController.createEntrenamiento);
-router.put('/:id', verifyToken, entrenamientosController.updateEntrenamiento);
-router.delete('/:id', verifyToken, entrenamientosController.deleteEntrenamiento);
+router.get('/', entrenamientosController.getEntrenamientos)
+router.get('/:id', entrenamientosController.getEntrenamientoById)
 
-module.exports = router;
+router.post('/', verifyToken, checkRole('entrenador'), entrenamientosController.createEntrenamiento)
+router.put('/:id', verifyToken, checkRole('entrenador'), entrenamientosController.updateEntrenamiento)
+router.put('/:id/asistencia', verifyToken, checkRole('entrenador'), entrenamientosController.updateAsistencia)
+router.delete('/:id', verifyToken, checkRole('entrenador'), entrenamientosController.deleteEntrenamiento)
+
+module.exports = router; 

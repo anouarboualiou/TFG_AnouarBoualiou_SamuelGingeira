@@ -4,9 +4,15 @@ const router = express.Router();
 const authController = require('./auth.controller');
 const verifyToken = require('../middleware/auth.middleware');
 
-router.post('/login', authController.login)
+//Login 
+router.post('/login', authController.login);
 
-router.get('/me', verifyToken, authController.me)
+//Obtener usuario autenticado
+router.get('/me', verifyToken, authController.me);
 
+//logout
+router.post('/logout', verifyToken, (req, res) => {
+    res.json({ message: 'Logout correcto' });
+});
 
-module.exports = router
+module.exports = router;

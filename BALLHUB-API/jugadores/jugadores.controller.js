@@ -12,6 +12,30 @@ function getJugadores(req, res){
 
 }
 
+function getJugadoresByEquipo(req, res) {
+
+     const { id_equipo } = req.params;
+
+    jugadorModel.getByEquipo(
+
+        id_equipo,
+
+        (err, result) => {
+
+            if (err) {
+
+                return res.status(500).json(err);
+
+            }
+
+            res.json(result);
+
+        }
+
+    );
+
+}
+
 function getJugadorById(req, res){
 
     const {id} = req.params
@@ -99,4 +123,4 @@ function deleteJugador(req, res){
 }
 
 
-module.exports = { getJugadores, getJugadorById, createJugador, updateJugador, deleteJugador} 
+module.exports = { getJugadores, getJugadoresByEquipo, getJugadorById, createJugador, updateJugador, deleteJugador} 

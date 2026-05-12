@@ -2,14 +2,20 @@ const noticiaModel = require('./noticias.model');
 
 function getNoticias(req, res) {
 
-    noticiaModel.getAll((err, result) => {
+    const { equipo } = req.query;
+
+
+
+    noticiaModel.getByEquipo(equipo || null, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
         }
 
         res.json(result);
+
     });
+
 }
 
 function getNoticiaById(req, res) {

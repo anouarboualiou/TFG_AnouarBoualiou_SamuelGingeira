@@ -48,9 +48,9 @@ function createPartido(req, res){
     })
 }
 
-function updatePartido(req, res){
+function updatePartido(req, res) {
 
-    const {id} = req.params
+    const { id } = req.params;
 
     partidoModel.update(id, req.body, (err, result) => {
 
@@ -58,12 +58,41 @@ function updatePartido(req, res){
             return res.status(500).json(err);
         }
 
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Partido no encontrado'
+            });
+        }
+
         res.json({
             message: 'Partido actualizado'
-        })
-    })
-
+        });
+    });
 }
+
+
+function updateResultado(req, res) {
+
+    const { id } = req.params;
+
+    partidoModel.updateResultado(id, req.body, (err, result) => {
+
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Partido no encontrado'
+            });
+        }
+
+        res.json({
+            message: 'Resultado añadido'
+        });
+    });
+}
+
 
 function deletePartido(req, res){
 
@@ -82,4 +111,4 @@ function deletePartido(req, res){
 }
 
 
-module.exports = {getPartidos, getPartidoById, createPartido, updatePartido, deletePartido}
+module.exports = {getPartidos, getPartidoById, createPartido, updatePartido, updateResultado, deletePartido}

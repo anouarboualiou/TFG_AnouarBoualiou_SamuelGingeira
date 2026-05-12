@@ -69,6 +69,28 @@ function updateEntrenamiento(req, res) {
     });
 }
 
+function updateAsistencia(req, res) {
+
+    const { id } = req.params;
+
+    entrenamientoModel.updateAsistencia(id, req.body, (err, result) => {
+
+        if (err) {
+            return res.status(500).json(err);
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({
+                message: 'Entrenamiento no encontrado'
+            });
+        }
+
+        res.json({
+            message: 'Asistencia actualizada'
+        });
+    });
+}
+
 function deleteEntrenamiento(req, res) {
 
     const { id } = req.params;
@@ -96,5 +118,6 @@ module.exports = {
     getEntrenamientoById,
     createEntrenamiento,
     updateEntrenamiento,
+    updateAsistencia,
     deleteEntrenamiento
 };

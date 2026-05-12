@@ -7,6 +7,35 @@ function getAll(callback) {
     db.query(sql, callback);
 }
 
+function getByEquipo(equipo, callback) {
+
+    let sql = `
+        SELECT 
+            n.id_noticia,
+            n.titulo,
+            n.descripcion,
+            n.fecha_pub,
+            n.foto_noticia,
+            n.id_equipo,
+            e.nombre AS nombre_equipo
+        FROM NOTICIA n
+        INNER JOIN EQUIPO e
+            ON n.id_equipo = e.id_equipo
+    `;
+
+    const params = [];
+
+    if (equipo) {
+
+        sql += ` WHERE n.id_equipo = ? `;
+        params.push(equipo);
+
+    }
+
+    db.query(sql, params, callback);
+
+}
+
 function getById(id, callback) {
 
     const sql = `
@@ -30,7 +59,15 @@ function create(data, callback) {
         VALUES (?, ?, ?, ?, ?)
     `;
 
-     db.query(sql, [data.titulo, data.descripcion, data.fecha_pub, data.foto_noticia, data.id_equipo, id], callback);
+    db.query(sql, [
+
+        data.titulo,
+        data.descripcion,
+        data.fecha_pub,
+        data.foto_noticia,
+        data.id_equipo
+
+    ], callback);
 
 }
 
@@ -57,4 +94,4 @@ function remove(id, callback) {
     db.query(sql, [id], callback);
 }
 
-module.exports = {getAll, getById, create, update, remove};
+module.exports = {getAll, getByEquipo,getById, create, update, remove};

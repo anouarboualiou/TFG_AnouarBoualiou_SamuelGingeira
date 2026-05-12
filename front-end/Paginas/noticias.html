@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet" />
 
+
+    
 </head>
 
 
@@ -30,7 +32,7 @@
 
         <div class="container px-4 px-lg-5">
 
-            <a class="navbar-brand" href="../index.html">BALLHUB</a>
+            <a class="navbar-brand" href="/">BALLHUB</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
                 Menu
@@ -41,15 +43,15 @@
                 <ul class="navbar-nav ms-auto">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.html">INICIO</a>
+                        <a class="nav-link" href="/">INICIO</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="./noticias.html">NOTICIAS</a>
+                        <a class="nav-link active" href="/noticias">NOTICIAS</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./partidos.html">PARTIDOS</a>
+                        <a class="nav-link" href="/partidos">PARTIDOS</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -67,7 +69,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="./inicioSesion.html" class="nav-link">
+                        <a href="/login" class="nav-link">
                             <i class="bi bi-person fs-4"></i>
                         </a>
                     </li>
@@ -93,14 +95,9 @@
 
             <div class="col-md-3">
 
-                <select id="filtroCategoria" class="form-select">
+                <select id="filtroEquipo" class="form-select">
 
-                    <option value="">Categoría</option>
-                    <option value="alevin">Alevín</option>
-                    <option value="infantil">Infantil</option>
-                    <option value="cadete">Cadete</option>
-                    <option value="juvenil">Juvenil</option>
-                    <option value="regional">Regional</option>
+                    <option value="">Todos los equipos</option>
 
                 </select>
 
@@ -137,48 +134,6 @@
         <div class="row g-4" id="listaNoticias">
 
 
-            <!-- EJEMPLO -->
-
-            <div class="col-md-6">
-
-                <article class="tarjetaNoticia">
-
-                    <div class="imagen-noticia">
-
-                        <img src="https://golsmedia.com/wp-content/uploads/2022/03/paul-otia-llanera.jpeg">
-
-                        <span class="badge bg-primary categoria">Regional</span>
-
-                    </div>
-
-                    <div class="contenido-noticia">
-
-                        <h5 class="titulo-noticia">
-                            Nuevo fichaje para el Regional
-                        </h5>
-
-                        <p class="texto-noticia">
-                            El club incorpora un nuevo extremo para reforzar la plantilla.
-                        </p>
-
-                        <div class="info-noticia">
-                            <span>10 Feb 2026</span>
-                        </div>
-
-                        <a href="#" class="btn btn-primary btn-article">
-                            Leer más
-                        </a>
-
-                    </div>
-
-                </article>
-                
-
-            </div>
-
-            
-
-
         </div>
 
     </section>
@@ -199,10 +154,10 @@
                 <div class="col-lg-4 tarjetas-links">
                     <h5 class="text-white">Enlaces Rápidos</h5>
                     <ul class="listaEnlaces">
-                        <li><a href="">Inicio<i class="bi bi-chevron-right"></i></a></li>
-                        <li><a href="">Noticias<i class="bi bi-chevron-right"></i></a></li>
-                        <li><a href="">Partidos<i class="bi bi-chevron-right"></i></a></li>
-                        <li><a href="">Iniciar Sesion<i class="bi bi-chevron-right"></i></a></li>
+                        <li><a href="/">Inicio<i class="bi bi-chevron-right"></i></a></li>
+                        <li><a href="/noticias">Noticias<i class="bi bi-chevron-right"></i></a></li>
+                        <li><a href="/partidos">Partidos<i class="bi bi-chevron-right"></i></a></li>
+                        <li><a href="/login">Iniciar Sesion<i class="bi bi-chevron-right"></i></a></li>
                     </ul>
 
                 </div>
@@ -268,77 +223,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../scripts/navbarScript.js"></script>
+    <script src="../scripts/Noticias/noticias.js"></script>
 
-
-    <!-- JS PARA BACKEND -->
-
-    <script>
-
-        async function cargarNoticias() {
-
-            const categoria = document.getElementById("filtroCategoria").value
-            const orden = document.getElementById("filtroFecha").value
-
-            let url = "/api/noticias?"
-
-            if (categoria) url += "categoria=" + categoria + "&"
-            if (orden) url += "orden=" + orden
-
-            const res = await fetch(url)
-
-            const data = await res.json()
-
-            const lista = document.getElementById("listaNoticias")
-
-            contenedor.innerHTML = ""
-
-            data.forEach(n => {
-
-                contenedor.innerHTML += `
-
-<div class="col-md-6">
-
-<article class="tarjetaNoticia">
-
-<div class="imagen-noticia">
-
-<img src="${n.imagen}">
-<span class="badge bg-primary categoria">${n.categoria}</span>
-
-</div>
-
-<div class="contenido-noticia">
-
-<h5 class="titulo-noticia">
-${n.titulo}
-</h5>
-
-<p class="texto-noticia">
-${n.descripcion}
-</p>
-
-<div class="info-noticia">
-<span>${n.fecha}</span>
-</div>
-
-<a href="#" class="btn btn-primary btn-article">
-Leer más
-</a>
-
-</div>
-
-</article>
-
-</div>
-
-`
-
-            })
-
-        }
-
-    </script>
-
+    
 
 </body>
 
