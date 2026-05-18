@@ -1,4 +1,3 @@
-
 const equipoModel = require('./equipos.model')
 
 

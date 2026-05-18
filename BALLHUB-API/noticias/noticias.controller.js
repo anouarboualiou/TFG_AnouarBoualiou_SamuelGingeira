@@ -4,8 +4,6 @@ function getNoticias(req, res) {
 
     const { equipo } = req.query;
 
-
-
     noticiaModel.getByEquipo(equipo || null, (err, result) => {
 
         if (err) {
@@ -52,6 +50,7 @@ function createNoticia(req, res) {
         });
     });
 }
+
 
 function updateNoticia(req, res) {
 

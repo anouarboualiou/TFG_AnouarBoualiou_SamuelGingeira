@@ -13,6 +13,7 @@ function getByEquipo(equipo, callback) {
         SELECT 
             n.id_noticia,
             n.titulo,
+            n.subtitulo,
             n.descripcion,
             n.fecha_pub,
             n.foto_noticia,
@@ -62,7 +63,7 @@ function create(data, callback) {
             foto_noticia,
             id_equipo
         )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     db.query(sql, [

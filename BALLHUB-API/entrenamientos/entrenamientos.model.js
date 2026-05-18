@@ -60,7 +60,6 @@ function update(id, data, callback) {
             fecha = ?,
             hora_entreno = ?,
             tiempo = ?,
-            asistentes = ?,
             id_equipo = ?
         WHERE id_entrenamiento = ?
     `;
@@ -73,9 +72,9 @@ function update(id, data, callback) {
         data.fecha,
         data.hora_entreno,
         data.tiempo,
-        data.asistentes || null,
         data.id_equipo,
         id
+
     ], callback);
 }
 

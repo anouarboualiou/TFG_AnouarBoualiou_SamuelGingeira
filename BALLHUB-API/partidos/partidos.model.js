@@ -20,10 +20,7 @@ function getByFiltros(equipo, estado, callback) {
     `;
 
     const params = [];
-
     const condiciones = [];
-
-
 
     if (equipo) {
 
@@ -32,8 +29,6 @@ function getByFiltros(equipo, estado, callback) {
 
     }
 
-
-
     if (estado) {
 
         condiciones.push(`p.estado = ?`);
@@ -41,22 +36,15 @@ function getByFiltros(equipo, estado, callback) {
 
     }
 
-
-
     if (condiciones.length > 0) {
 
         sql += ` WHERE ` + condiciones.join(' AND ');
 
     }
 
-
-
     db.query(sql, params, callback);
 
 }
-
-
-
 
 function getById(id, callback) {
 
@@ -78,11 +66,10 @@ function create(data, callback) {
             rival_nombre,
             esLocal,
             estado,
-            temporada,
             foto_campo,
             id_equipo
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     db.query(sql, [
@@ -94,7 +81,6 @@ function create(data, callback) {
 
         'pendiente',
 
-        data.temporada,
         data.foto_campo,
         data.id_equipo
     ], callback);
@@ -113,7 +99,6 @@ function update(id, data, callback) {
             goles_favor = ?,
             esLocal = ?,
             estado = ?,
-            temporada = ?,
             foto_campo = ?,
             id_equipo = ?
         WHERE id_partido = ?
@@ -129,7 +114,6 @@ function update(id, data, callback) {
         data.goles_favor,
         data.esLocal,
         data.estado,
-        data.temporada,
         data.foto_campo,
         data.id_equipo,
         id

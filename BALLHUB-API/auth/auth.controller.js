@@ -54,7 +54,7 @@ function login(req, res){
                     rol: usuario.rol,
                     id_entrenador: usuario.id_entrenador,
                     id_equipo: usuario.id_equipo,
-
+                    
                     nombre: usuario.nombre,
                     apellidos: usuario.apellidos,
                     foto_perfil: usuario.foto_perfil,

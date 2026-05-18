@@ -60,6 +60,17 @@ app.get('/noticias/:id', (req, res) => {
 
 });
 
+app.get('/equipos/:id', (req, res) => {
+
+    res.sendFile(
+        path.join(
+            __dirname,
+            '../front-end/Paginas/equipo.html'
+        )
+    );
+
+});
+
 // API
 app.use('/api/equipos', equiposRoutes)
 app.use('/api/auth', authRoutes)

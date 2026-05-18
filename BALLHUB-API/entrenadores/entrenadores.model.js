@@ -21,7 +21,6 @@ function getAll(callback) {
 
     `;
 
-    console.log(sql);
 
     db.query(sql, callback);
 
@@ -79,25 +78,38 @@ function create(data, callback) {
 
 function update(id, data, callback) {
 
+    const mantenerEquipoActual = !Object.prototype.hasOwnProperty.call(
+        data,
+        'id_equipo'
+    );
+
     const sql = `
         UPDATE ENTRENADOR
         SET
             nombre = ?,
             apellidos = ?,
             fecha_nacim = ?,
-            id_equipo = ?,
+            id_equipo = ${mantenerEquipoActual ? 'id_equipo' : '?'},
             foto_perfil = ?
         WHERE id_entrenador = ?
     `;
 
-    db.query(sql, [
+    const params = [
         data.nombre,
         data.apellidos,
-        data.fecha_nacim,
-        data.id_equipo,
+        data.fecha_nacim
+    ];
+
+    if (!mantenerEquipoActual) {
+        params.push(data.id_equipo);
+    }
+
+    params.push(
         data.foto_perfil,
         id
-    ], callback);
+    );
+
+    db.query(sql, params, callback);
 }
 
 function remove(id, callback) {

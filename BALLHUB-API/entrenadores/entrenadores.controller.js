@@ -68,7 +68,7 @@ function createEntrenadorFull(req, res) {
     db.beginTransaction((err) => {
         if (err) return res.status(500).json(err);
 
-        // 1️⃣ Crear ENTRENADOR
+        // Crear ENTRENADOR
         const sqlEntrenador = `
             INSERT INTO ENTRENADOR (
                 nombre,
@@ -94,10 +94,10 @@ function createEntrenadorFull(req, res) {
             const id_entrenador = result.insertId;
 
             try {
-                // 2️⃣ Hash password
+                // Hash password
                 const hash = await bcrypt.hash(password, 10);
 
-                // 3️⃣ Crear USUARIO
+                // Crear USUARIO
                 const sqlUsuario = `
                     INSERT INTO USUARIO (
                         email,
@@ -117,7 +117,7 @@ function createEntrenadorFull(req, res) {
                         return db.rollback(() => res.status(500).json(err2));
                     }
 
-                    // 4️⃣ Confirmar todo
+                    // Confirmar todo
                     db.commit((err3) => {
                         if (err3) {
                             return db.rollback(() => res.status(500).json(err3));
@@ -141,21 +141,49 @@ function updateEntrenador(req, res) {
 
     const { id } = req.params;
 
-    entrenadorModel.update(id, req.body, (err, result) => {
+    const actualizar = (data) => {
+
+        entrenadorModel.update(id, data, (err, result) => {
+
+            if (err) {
+                return res.status(500).json(err);
+            }
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({
+                    message: 'Entrenador no encontrado'
+                });
+            }
+
+            res.json({
+                message: 'Entrenador actualizado'
+            });
+
+        });
+
+    };
+
+    if (Object.prototype.hasOwnProperty.call(req.body, 'id_equipo')) {
+        return actualizar(req.body);
+    }
+
+    entrenadorModel.getById(id, (err, result) => {
 
         if (err) {
             return res.status(500).json(err);
         }
 
-        if (result.affectedRows === 0) {
+        if (result.length === 0) {
             return res.status(404).json({
                 message: 'Entrenador no encontrado'
             });
         }
 
-        res.json({
-            message: 'Entrenador actualizado'
+        actualizar({
+            ...req.body,
+            id_equipo: result[0].id_equipo
         });
+
     });
 }
 
