@@ -322,6 +322,11 @@ async function crearEquipo() {
             .getInstance(document.getElementById('modalEquipo'))
             .hide();
 
+        mostrarAlerta(
+            'Equipo añadido',
+            'success'
+        )
+
         // recargar tabla
         cargarEquipos();
 
@@ -369,6 +374,11 @@ async function editarEquipo() {
             .getInstance(document.getElementById('modalEquipo'))
             .hide();
 
+        mostrarAlerta(
+            'Equipo actualizado',
+            'warning'
+        )
+
         cargarEquipos();
 
     }
@@ -407,6 +417,11 @@ async function borrarEquipo(boton) {
             throw new Error('Error al eliminar');
 
         }
+
+        mostrarAlerta(
+            'Equipo borrado',
+            'danger'
+        )
 
         cargarEquipos();
 

@@ -249,15 +249,15 @@ function abrirModalCrearEntrenamiento() {
                         class="form-select"
                         id="tipo">
 
-                        <option value="Fisico">
+                        <option value="fisico">
                             Físico
                         </option>
 
-                        <option value="Tecnico">
+                        <option value="tecnico">
                             Técnico
                         </option>
 
-                        <option value="Tactico">
+                        <option value="tactico">
                             Táctico
                         </option>
 
@@ -659,18 +659,18 @@ function abrirModalEditarEntreno(idEntrenamiento) {
                     id="editTipo"
                     class="form-select">
 
-                    <option value="Fisico"
-                        ${entrenamiento.tipo === 'Fisico' ? 'selected' : ''}>
+                    <option value="fisico"
+                        ${entrenamiento.tipo === 'fisico' ? 'selected' : ''}>
                         Físico
                     </option>
 
-                    <option value="Tecnico"
-                        ${entrenamiento.tipo === 'Tecnico' ? 'selected' : ''}>
+                    <option value="tecnico"
+                        ${entrenamiento.tipo === 'tecnico' ? 'selected' : ''}>
                         Técnico
                     </option>
 
-                    <option value="Tactico"
-                        ${entrenamiento.tipo === 'Tactico' ? 'selected' : ''}>
+                    <option value="tactico"
+                        ${entrenamiento.tipo === 'tactico' ? 'selected' : ''}>
                         Táctico
                     </option>
 

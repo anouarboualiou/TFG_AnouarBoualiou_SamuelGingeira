@@ -1121,3 +1121,30 @@
     }
 
 }
+
+
+@media (max-width: 576px){
+
+    #btnAniadirEntrenamiento{
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    #trainings .d-flex.justify-content-between{
+        gap: 12px;
+    }
+
+}
+
+@media (max-width: 576px){
+
+    .accionesPartido .btn{
+        font-size: 0.9rem;
+        letter-spacing: 0;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+}

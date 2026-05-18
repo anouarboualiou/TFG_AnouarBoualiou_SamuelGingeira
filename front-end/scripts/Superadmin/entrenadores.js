@@ -431,6 +431,11 @@ async function crearEntrenador() {
             )
             .hide();
 
+        mostrarAlerta(
+            'Entrenador añadido',
+            'success'
+        )
+
         // recargar
         cargarEntrenadores();
         cargarEquipos();
@@ -669,6 +674,13 @@ async function editarEntrenador() {
             )
             .hide();
 
+        
+
+        mostrarAlerta(
+            'Entrenador actualizdo',
+            'warning'
+        )
+
         cargarEntrenadores();
 
     }
@@ -885,6 +897,12 @@ async function guardarEquipoAsignado() {
             )
             .hide();
 
+        mostrarAlerta(
+            'Equipo asignado al entrenador',
+            'success'
+        )
+            
+
         cargarEntrenadores();
         cargarEquipos();
 
@@ -934,6 +952,11 @@ async function borrarEntrenador(boton) {
             );
 
         }
+
+        mostrarAlerta(
+            'Entrenador eliminado',
+            'danger'
+        )
 
         cargarEntrenadores();
         cargarEquipos();
@@ -1156,6 +1179,12 @@ async function guardarCredenciales() {
                 )
             )
             .hide();
+
+
+        mostrarAlerta(
+            'Credenciales añadidas',
+            'success'
+        )
 
         cargarEntrenadores();
 
