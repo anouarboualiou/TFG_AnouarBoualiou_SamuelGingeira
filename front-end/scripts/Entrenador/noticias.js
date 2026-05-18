@@ -1,14 +1,6 @@
-const contenedorNoticias = document.getElementById(
-    'contenedorNoticias'
-);
-
-const contenidoModalNoticia = document.getElementById(
-    'contenidoModalNoticia'
-);
-
-const btnAniadirNoticia = document.getElementById(
-    'btnAniadirNoticia'
-);
+const contenedorNoticias = document.getElementById('contenedorNoticias');
+const contenidoModalNoticia = document.getElementById('contenidoModalNoticia');
+const btnAniadirNoticia = document.getElementById('btnAniadirNoticia');
 
 let listaNoticias = [];
 
@@ -29,6 +21,7 @@ async function cargarNoticias(){
         );
 
         const noticias = await res.json();
+        
 
         listaNoticias = noticias.filter(
             n => n.id_equipo == user.id_equipo
@@ -49,11 +42,21 @@ function renderNoticias(noticias){
 
     contenedorNoticias.innerHTML = '';
 
+    if(noticias.length === 0){
+        contenedorNoticias.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-newspaper fs-1 text-muted"></i>
+                <p class="text-muted mt-3">No hay noticias todavía</p>
+            </div>
+        `;
+        return;
+    }
+
     noticias.forEach(noticia => {
 
         contenedorNoticias.innerHTML += `
 
-            <div class="col-12 col-xl-6">
+            <div class="col-md-4">
 
                 <article class="tarjetaNoticia">
 
@@ -131,10 +134,7 @@ function renderNoticias(noticias){
 
 cargarNoticias();
 
-btnAniadirNoticia.addEventListener(
-    'click',
-    abrirModalCrearNoticia
-);
+btnAniadirNoticia.addEventListener('click',abrirModalCrearNoticia);
 
 function abrirModalCrearNoticia(){
 
@@ -238,16 +238,9 @@ function abrirModalCrearNoticia(){
 
     `;
 
-    new bootstrap.Modal(
-        document.getElementById('modalNoticia')
-    ).show();
+    new bootstrap.Modal(document.getElementById('modalNoticia')).show();
 
-    document
-        .getElementById('btnGuardarNoticia')
-        .addEventListener(
-            'click',
-            guardarNoticia
-        );
+    document.getElementById('btnGuardarNoticia').addEventListener('click',guardarNoticia);
 
 }
 
@@ -389,7 +382,10 @@ function abrirModalEditarNoticia(idNoticia){
                         class="form-control"
                         value="${noticia.titulo}">
 
+                    <input type="hidden" id="editFechaPub" value="${noticia.fecha_pub}">
+
                 </div>
+                
 
                 <div class="mb-3">
 
@@ -480,10 +476,13 @@ async function actualizarNoticia(idNoticia){
                 'editTituloNoticia'
             ).value,
 
-            subtitulo:
-                document.getElementById(
-                    'editSubtituloNoticia'
-                ).value,
+        subtitulo:
+            document.getElementById(
+                'editSubtituloNoticia'
+            ).value,
+
+        fecha_pub: document.getElementById('editFechaPub').value,
+
 
         descripcion:
             document.getElementById(

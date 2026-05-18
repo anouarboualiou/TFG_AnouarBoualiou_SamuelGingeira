@@ -39,6 +39,16 @@ function renderJugadores(jugadores) {
 
     const contenedor = document.getElementById('contenedorJugadores');
 
+    if(jugadores.length === 0){
+        contenedor.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-people fs-1 text-muted"></i>
+                <p class="text-muted mt-3">No hay jugadores en la plantilla</p>
+            </div>
+        `;
+        return;
+    }
+
     contenedor.innerHTML = '';
 
     jugadores.forEach(jugador => {
@@ -88,7 +98,7 @@ function renderJugadores(jugadores) {
 
                     </div>
 
-                    <div class="d-flex gap-2 mt-3">
+                    <div class="trainer-actions">
 
                         <button
                             class="btn btn-warning flex-fill btn-editar-jugador"

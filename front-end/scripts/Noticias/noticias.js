@@ -20,7 +20,6 @@ async function cargarEquipos() {
 
 }
 
-
 async function cargarNoticias() {
 
     const equipo = document.getElementById("filtroEquipo").value
@@ -36,12 +35,37 @@ async function cargarNoticias() {
 
     }
 
+    const lista = document.getElementById("listaNoticias")
+
+    lista.innerHTML = `
+
+        <div class="col-12 text-center py-5">
+
+            <div
+                class="spinner-border text-primary"
+                role="status">
+
+                <span class="visually-hidden">
+                    Cargando...
+                </span>
+
+            </div>
+
+            <p class="mt-3 text-muted">
+
+                Cargando noticias...
+
+            </p>
+
+        </div>
+
+    `
+
 
 
     const res = await fetch(url)
 
     const data = await res.json()
-
 
 
     // ORDENAR FECHAS EN FRONTEND
@@ -63,13 +87,9 @@ async function cargarNoticias() {
 
     })
 
-
-
-    const lista = document.getElementById("listaNoticias")
+    
 
     lista.innerHTML = ""
-
-
 
     // SI NO HAY NOTICIAS
 
@@ -85,14 +105,13 @@ async function cargarNoticias() {
     }
 
 
-
     // PINTAR NOTICIAS
 
     data.forEach(n => {
 
     lista.innerHTML += `
 
-    <div class="col-md-6">
+    <div class="col-md-4">
 
         <article class="tarjetaNoticia">
 
@@ -113,7 +132,7 @@ async function cargarNoticias() {
                 </h5>
 
                 <p class="texto-noticia">
-                    ${n.descripcion}
+                    ${n.subtitulo || ""}
                 </p>
 
                 <div class="info-noticia">

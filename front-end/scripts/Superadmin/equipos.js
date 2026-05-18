@@ -51,9 +51,9 @@ function renderEquipos(equipos) {
                     }
                 </td>
 
-                <td class="text-center">
+                <td class="text-center actions-cell">
 
-                    <button class="btn btn-warning btn-sm px-3 py-3 btn-editar"
+                    <button class="btn btn-warning btn-sm btn-editar"
                         data-id="${equipo.id_equipo}"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEquipo">
@@ -61,7 +61,7 @@ function renderEquipos(equipos) {
                     </button>
 
                     <button 
-                        class="btn btn-danger btn-sm px-3 py-3 btn-borrar"
+                        class="btn btn-danger btn-sm btn-borrar"
                         data-id="${equipo.id_equipo}">
                         <i class="bi bi-trash"></i>
                     </button>

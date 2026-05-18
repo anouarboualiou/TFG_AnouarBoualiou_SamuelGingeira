@@ -65,9 +65,23 @@ function renderEntrenamientos(entrenamientos) {
 
     listaEntrenamientosContainer.innerHTML = ''
 
+    if(entrenamientos.length === 0){
+        listaEntrenamientosContainer.innerHTML = `
+            <div class="text-center py-5">
+                <i class="bi bi-activity fs-1 text-muted"></i>
+                <p class="text-muted mt-3">No hay entrenamientos registrados</p>
+            </div>
+        `;
+        return;
+    }
+
     entrenamientos.forEach(entrenamiento => {
 
         const puedeAsignarAsistencia = fechaHoraYaPasada(entrenamiento.fecha, entrenamiento.hora_entreno) && entrenamiento.estado !== 'finalizado';
+
+        const yaTieneAsistencia =
+            entrenamiento.asistentes !== null &&
+            entrenamiento.asistentes !== undefined
 
         listaEntrenamientosContainer.innerHTML += `
 
@@ -103,49 +117,45 @@ function renderEntrenamientos(entrenamientos) {
 
                 </div>
 
-                <div class="d-flex gap-2">
+                <div class="trainer-actions">
 
-                    ${entrenamiento.estado === 'finalizado' ?
+                    ${fechaHoraYaPasada(
+                        entrenamiento.fecha,
+                        entrenamiento.hora_entreno
+                    )
+
+                        ?
 
                         `
                         <button
-                            class="btn btn-success btn-sm opacity-75"
-                            disabled>
+                            class="btn btn-success btn-sm btn-asistencia trainer-action-main"
+                            data-id="${entrenamiento.id_entrenamiento}">
 
-                            ${entrenamiento.asistentes} asistentes
+                            <i class="bi bi-people"></i>
+
+                            ${entrenamiento.asistentes !== null
+                                ? `${entrenamiento.asistentes} asistentes`
+                                : 'Registrar'
+                            }
 
                         </button>
                         `
 
                         :
 
-                        puedeAsignarAsistencia ?
+                        `
+                        <button
+                            class="btn btn-secondary btn-sm opacity-75 trainer-action-main"
+                            disabled>
 
-                            `
-                            <button
-                                class="btn btn-success btn-sm btn-asistencia"
-                                data-id="${entrenamiento.id_entrenamiento}">
+                            Pendiente
 
-                                <i class="bi bi-people"></i>
-
-                            </button>
-                            `
-
-                            :
-
-                            `
-                                <button
-                                    class="btn btn-secondary btn-sm opacity-75"
-                                    disabled>
-
-                                    Pendiente
-
-                                </button>
-                            `
+                        </button>
+                        `
                     }
 
                     <button
-                        class="btn btn-warning btn-sm btn-editar-entreno"
+                        class="btn btn-warning btn-sm btn-editar-entreno trainer-action-icon"
                         data-id="${entrenamiento.id_entrenamiento}">
 
                         <i class="bi bi-pencil"></i>
@@ -153,7 +163,7 @@ function renderEntrenamientos(entrenamientos) {
                     </button>
 
                     <button
-                        class="btn btn-danger btn-sm btn-borrar-entreno"
+                        class="btn btn-danger btn-sm btn-borrar-entreno trainer-action-icon"
                         data-id="${entrenamiento.id_entrenamiento}">
 
                         <i class="bi bi-trash"></i>
@@ -454,7 +464,10 @@ function abrirModalAsistencia(idEntrenamiento) {
 
             <h5 class="modal-title">
 
-                Registrar asistencia
+                ${entrenamiento.asistentes !== null
+                    ? 'Editar asistencia'
+                    : 'Registrar asistencia'
+                }
 
             </h5>
 
@@ -489,7 +502,8 @@ function abrirModalAsistencia(idEntrenamiento) {
                     id="inputAsistentes"
                     class="form-control"
                     min="0"
-                    max="${totalJugadores}">
+                    max="${totalJugadores}"
+                    value="${entrenamiento.asistentes || 0}">
 
             </div>
 

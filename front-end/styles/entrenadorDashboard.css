@@ -1,0 +1,1123 @@
+/* =========================================
+   TRAINER SIDEBAR / NAVBAR
+========================================= */
+
+.trainer-navbar {
+    background: linear-gradient(to bottom, rgba(0,0,0,.95), rgba(0,0,0,.88));
+    backdrop-filter: blur(14px);
+    z-index: 1050;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   DESKTOP
+========================================= */
+
+@media (min-width: 768px) {
+
+    .trainer-navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 90px;
+        height: 100vh;
+        padding: 24px 0;
+        border-right: 1px solid rgba(255,255,255,.06);
+        transition: width .3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .trainer-navbar.expanded {
+        width: 280px;
+    }
+
+    /* Ocultar el toggler en desktop */
+    .trainer-navbar-toggler {
+        display: none !important;
+    }
+
+    /* En desktop el collapse siempre visible */
+    .trainer-navbar-collapse {
+        display: flex !important;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .trainer-navbar .container-fluid {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+    }
+
+    .trainer-main {
+        margin-left: 90px;
+        width: calc(100% - 90px);
+        transition: margin-left .3s ease, width .3s ease;
+    }
+
+    .trainer-main.expanded {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+    }
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.trainer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+    margin-bottom: 24px;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: white;
+    padding: 0 18px;
+    flex-shrink: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.trainer-logo-mobile {
+    display: block;
+    flex-shrink: 0;
+}
+
+.trainer-logo-desktop {
+    display: none;
+    color: white;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.trainer-navbar.expanded .trainer-logo-mobile {
+    display: none;
+}
+
+.trainer-navbar.expanded .trainer-logo-desktop {
+    display: block;
+}
+
+/* =========================================
+   INFO EQUIPO
+========================================= */
+
+#infoEquipo {
+    padding: 0 18px;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   MENU
+========================================= */
+
+.trainer-menu {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* LINKS como BOTONES con estilo de marca */
+.trainer-link{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:14px;
+
+    width:100%;
+
+    padding:14px 0;
+
+    color:rgba(255,255,255,.75);
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    transition:.2s ease;
+
+    cursor:pointer;
+
+}
+
+.trainer-link i {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+.trainer-link:hover{
+
+    color:white;
+
+}
+
+.trainer-link.active{
+
+    color:white;
+
+}
+
+.trainer-link.active::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-2px;
+
+    right:0;
+
+    width:42px;
+
+    height:3px;
+
+    border-radius:10px;
+
+    background:#64a19d;
+
+}
+
+/* =========================================
+   SIDEBAR TEXT (oculto cuando colapsado en desktop)
+========================================= */
+
+.trainer-sidebar-text {
+    display: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.trainer-navbar.expanded .trainer-sidebar-text {
+    display: inline-block;
+}
+
+/* Cuando collapsed, centrar icono */
+@media (min-width:768px){
+
+    .trainer-navbar:not(.expanded) .trainer-link{
+
+        justify-content:center;
+
+        padding:14px 0;
+
+        width:100%;
+
+        margin:0;
+
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-link.active::after{
+
+        left:50%;
+
+        right:auto;
+
+        transform:translateX(-50%);
+
+        width:22px;
+
+    }
+
+}
+.trainer-navbar.expanded .trainer-link{
+
+    justify-content:flex-start;
+
+    padding-left:24px;
+
+}
+
+/* =========================================
+   LOGOUT WRAPPER
+========================================= */
+
+.trainer-logout-wrapper {
+    margin-top: auto;
+    width: 100%;
+    padding: 20px 10px 10px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* PERFIL */
+.trainer-logout-wrapper .d-flex.align-items-center {
+    overflow: hidden;
+}
+
+.trainer-logout-wrapper img {
+    flex-shrink: 0;
+}
+
+/* LOGOUT BUTTON */
+.trainer-btn-logout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #b76d74, #9c5a61);
+    color: white;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: .8rem;
+    transition: opacity .25s ease, box-shadow .25s ease;
+    box-shadow: 0 4px 12px rgba(183,109,116,.25);
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.trainer-btn-logout:hover {
+    opacity: .88;
+    box-shadow: 0 6px 18px rgba(183,109,116,.35);
+}
+
+/* Cuando collapsed: solo icono */
+@media (min-width: 768px) {
+    .trainer-navbar:not(.expanded) .trainer-btn-logout {
+        padding: 14px 0;
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   COLLAPSE STRUCTURE (desktop fix)
+========================================= */
+
+.trainer-navbar-collapse {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* =========================================
+   OVERFLOW / TEXT TRUNCATE
+========================================= */
+
+#nombreEntrenadorSidebar,
+#emailEntrenadorSidebar,
+#nombreEquipoSidebar {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+}
+
+.trainer-navbar.expanded {
+    overflow-y: auto;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+    .trainer-navbar {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        padding: 0;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .trainer-navbar .container-fluid {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        width: 100%;
+    }
+
+    .trainer-navbar-top-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 14px 18px;
+    }
+
+    .trainer-logo {
+        margin: 0;
+        min-height: auto;
+        padding: 0;
+        font-size: 1.6rem;
+    }
+
+    .trainer-logo-mobile { display: none; }
+    .trainer-logo-desktop { display: block; }
+
+    /* BOTÓN MENU — mismo estilo que la captura */
+    .trainer-navbar-toggler {
+        background: transparent;
+        border: 2px solid #64a19d;
+        border-radius: 10px;
+        padding: 6px 16px;
+        color: white;
+        font-size: .85rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        box-shadow: 0 0 10px rgba(100,161,157,.15);
+        cursor: pointer;
+        /* Quitamos el icono de Bootstrap */
+        background-image: none !important;
+    }
+
+    /* Collapse: animación suave */
+    .trainer-navbar-collapse {
+        width: 100%;
+        padding: 0 18px;
+        border-top: 1px solid rgba(255,255,255,.06);
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height .35s cubic-bezier(.4,0,.2,1),
+                    opacity .3s ease,
+                    padding .3s ease;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .trainer-navbar-collapse.show {
+        max-height: 600px;
+        opacity: 1;
+        padding-top: 10px !important;
+        padding-bottom: 20px !important;
+    }
+
+    .trainer-sidebar-text { display: inline-block; }
+
+    /* Links: texto grande alineado a la izquierda con subrayado teal */
+    .trainer-link {
+        width: 100%;
+        justify-content: flex-start;
+        padding: 14px 4px;
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+        border-bottom: none;
+        margin: 0;
+    }
+
+    /* Línea teal bajo el item activo — igual que la captura */
+    .trainer-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 2px;
+        background: #64a19d;
+        border-radius: 0;
+    }
+
+    .trainer-link:not(.active) {
+        border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    #infoEquipo { padding: 0; margin-bottom: 12px; }
+
+    .trainer-logout-wrapper {
+        padding: 16px 0 0;
+        margin-top: 10px;
+    }
+
+    .trainer-btn-logout { justify-content: center; }
+
+    .trainer-main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding-top: 80px !important;
+    }
+}
+
+/* =========================================
+   ACTION BUTTONS DESKTOP / TABLET
+========================================= */
+
+.trainer-actions {
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 140px;
+}
+
+.trainer-actions .btn {
+    width: 46px;
+    height: 46px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   MOBILE ACTION BUTTONS
+========================================= */
+
+@media (max-width: 767px) {
+    .trainer-actions {
+        min-width: 120px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .trainer-actions .btn {
+        width: 100%;
+        min-width: 46px;
+        min-height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0 !important;
+    }
+}
+
+/* =========================================
+   MOBILE COLLAPSE ANIMATION
+========================================= */
+
+@media (max-width: 767px) {
+
+    .trainer-navbar-collapse {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .35s cubic-bezier(.4, 0, .2, 1),
+                    opacity .3s ease,
+                    padding .3s ease;
+        opacity: 0;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .trainer-navbar-collapse.show {
+        max-height: 600px;
+        opacity: 1;
+        padding-top: 10px !important;
+        padding-bottom: 20px !important;
+    }
+
+}
+
+/* =========================================
+   ADMIN SIDEBAR MATCH + INDEX-LIKE MOBILE
+========================================= */
+
+@media (min-width: 768px) {
+
+    .trainer-navbar {
+        width: 90px;
+        padding: 24px 18px;
+        overflow: hidden;
+    }
+
+    .trainer-navbar.expanded {
+        width: 250px;
+    }
+
+    .trainer-navbar .container-fluid {
+        height: 100%;
+    }
+
+    .trainer-navbar-collapse {
+        display: flex !important;
+        min-height: 0;
+    }
+
+    .trainer-main {
+        margin-left: 90px;
+        width: calc(100% - 90px);
+    }
+
+    .trainer-main.expanded {
+        margin-left: 250px;
+        width: calc(100% - 250px);
+    }
+
+    .trainer-logo {
+        margin-bottom: 40px;
+        padding: 0;
+    }
+
+    #infoEquipo {
+        padding: 0;
+        margin-bottom: 28px;
+    }
+
+    .trainer-link {
+        justify-content: center;
+    }
+
+    .trainer-link.active::after {
+        left: 0;
+        right: auto;
+        width: 100%;
+        transform: none;
+    }
+
+    .trainer-navbar.expanded .trainer-link {
+        justify-content: flex-start;
+        padding-left: 14px;
+    }
+
+    .trainer-navbar.expanded .trainer-btn-logout {
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+
+    .trainer-navbar.expanded .trainer-profile {
+        display: flex;
+    }
+
+    .trainer-profile {
+        align-items: center;
+        min-width: 0;
+        padding: 0 2px;
+    }
+
+    .trainer-profile-info {
+        min-width: 0;
+    }
+
+}
+
+.trainer-profile img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
+}
+
+.trainer-profile-info {
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+
+    .trainer-navbar {
+        padding: 1rem 0;
+        background: rgba(0, 0, 0, .95);
+        backdrop-filter: blur(8px);
+    }
+
+    .trainer-navbar .container-fluid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+    }
+
+    .trainer-logo {
+        min-height: auto;
+        margin: 0;
+        padding: .35rem 0;
+        font-size: 1.5rem;
+        color: rgba(255, 255, 255, .65);
+        transition: color .25s ease;
+    }
+
+    .trainer-logo:hover {
+        color: #fff;
+    }
+
+    .trainer-logo-mobile {
+        display: none;
+    }
+
+    .trainer-logo-desktop {
+        display: block;
+    }
+
+    .trainer-navbar-toggler {
+        width: auto;
+        border: 1px solid #64a19d;
+        border-radius: .375rem;
+        padding: .75rem;
+        color: #64a19d;
+        box-shadow: none;
+    }
+
+    .trainer-navbar-toggler:focus {
+        box-shadow: 0 0 0 .15rem rgba(100, 161, 157, .25);
+    }
+
+    .trainer-navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-top: 0 solid transparent;
+        transition: height .35s ease, max-height .35s ease, opacity .25s ease, padding .25s ease, border-color .25s ease;
+    }
+
+    .trainer-navbar-collapse.show {
+        max-height: 620px;
+        opacity: 1;
+        padding-top: 1rem !important;
+        padding-bottom: 1.25rem !important;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .trainer-navbar-collapse.collapsing {
+        max-height: none;
+        opacity: 1;
+        padding-top: 1rem !important;
+        padding-bottom: 1.25rem !important;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+        transition: height .35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .trainer-navbar-collapse > .d-flex {
+        gap: .25rem;
+    }
+
+    #infoEquipo {
+        width: 100%;
+        padding: .25rem 0 .75rem;
+        margin-bottom: .25rem;
+    }
+
+    .trainer-sidebar-text {
+        display: inline-block;
+    }
+
+    .trainer-link {
+        justify-content: flex-start;
+        padding: .95rem 0;
+        color: rgba(255, 255, 255, .75);
+        font-size: .9rem;
+        letter-spacing: .15rem;
+        text-transform: uppercase;
+    }
+
+    .trainer-link.active::after {
+        bottom: .2rem;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-radius: 10px;
+        background: #64a19d;
+    }
+
+    .trainer-link:not(.active) {
+        border-bottom: 0;
+    }
+
+    .trainer-logout-wrapper {
+        margin-top: .75rem;
+        padding: .75rem 0 0;
+        border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .trainer-profile {
+        margin-bottom: 1rem !important;
+    }
+
+    .trainer-btn-logout {
+        border-radius: .375rem;
+        padding: .9rem 1rem;
+    }
+
+    .trainer-main {
+        padding-top: 108px !important;
+    }
+
+}
+
+/* =========================================
+   FINAL PROFILE + MOBILE NAVBAR POLISH
+========================================= */
+
+@media (min-width: 768px) {
+
+    .trainer-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        min-width: 0;
+        margin-bottom: 22px !important;
+        padding: 0;
+    }
+
+    .trainer-navbar.expanded .trainer-profile {
+        justify-content: flex-start;
+        padding-left: 0;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-profile-info {
+        display: none;
+    }
+
+    .trainer-navbar.expanded .trainer-profile-info {
+        display: block;
+        min-width: 0;
+    }
+
+    .trainer-profile img {
+        width: 48px;
+        height: 48px;
+        max-width: 48px;
+        min-width: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+}
+
+/* =========================================
+   FINAL AVATAR, EXPANDED PROFILE AND LOGOUT
+========================================= */
+
+.trainer-avatar {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .18);
+}
+
+.trainer-avatar img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+@media (min-width: 768px) {
+
+    .trainer-navbar {
+        width: 104px;
+    }
+
+    .trainer-navbar.expanded {
+        width: 280px;
+    }
+
+    .trainer-main {
+        margin-left: 104px;
+        width: calc(100% - 104px);
+    }
+
+    .trainer-main.expanded {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-link {
+        justify-content: center;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-profile {
+        justify-content: center;
+    }
+
+    .trainer-navbar.expanded .trainer-profile {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 12px !important;
+        width: 100%;
+        padding: 0 6px;
+        margin-bottom: 22px !important;
+    }
+
+    .trainer-navbar.expanded .trainer-avatar {
+        width: 58px;
+        height: 58px;
+        min-width: 58px;
+    }
+
+    .trainer-navbar.expanded .trainer-profile-info {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        line-height: 1.2;
+    }
+
+    #nombreEntrenadorSidebar,
+    #emailEntrenadorSidebar {
+        max-width: 100%;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .trainer-navbar {
+        min-height: 3.5rem;
+        padding: 1rem 0;
+    }
+
+    .trainer-navbar .container-fluid {
+        align-items: center;
+    }
+
+    .trainer-navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: hidden;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        border-top: 0 !important;
+        transition: none !important;
+    }
+
+    .trainer-navbar-collapse.collapse:not(.show):not(.collapsing) {
+        display: none !important;
+    }
+
+    .trainer-navbar-collapse.show {
+        display: block !important;
+        padding-top: 1rem !important;
+        padding-bottom: .5rem !important;
+    }
+
+    .trainer-navbar-collapse.collapsing {
+        display: block !important;
+        height: 0;
+        max-height: none !important;
+        opacity: 1 !important;
+        overflow: hidden;
+        padding-top: 1rem !important;
+        padding-bottom: .5rem !important;
+        border-top: 0 !important;
+        transition: height .35s ease !important;
+    }
+
+    .trainer-link,
+    .trainer-link:not(.active),
+    .trainer-logout-wrapper {
+        border: 0 !important;
+    }
+
+    .trainer-link {
+        padding: .95rem 0;
+    }
+
+    .trainer-profile {
+        display: flex;
+        width: 100%;
+    }
+
+    .trainer-profile-info {
+        display: block;
+        min-width: 0;
+    }
+
+    .trainer-btn-logout {
+        justify-content: center;
+        margin-top: 20px;
+        border-radius: 16px;
+        padding: 16px;
+        letter-spacing: 2px;
+        transform: none !important;
+        box-shadow: 0 4px 12px rgba(183, 109, 116, .18);
+    }
+
+}
+
+/* =========================================
+   FINAL DESKTOP COLLAPSED CONTROLS
+========================================= */
+
+@media (min-width: 768px) {
+
+    .trainer-logout-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0 10px;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-profile {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 18px !important;
+        padding: 0;
+        overflow: visible;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-avatar {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        box-shadow: 0 0 0 3px #fff;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-avatar img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-btn-logout {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        padding: 0 !important;
+        border-radius: 16px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .trainer-navbar:not(.expanded) .trainer-btn-logout i {
+        display: block;
+        width: 1em;
+        margin: 0;
+        line-height: 1;
+        text-align: center;
+    }
+
+    .trainer-navbar.expanded .trainer-profile {
+        align-items: center;
+        text-align: center;
+        padding: 0 8px;
+    }
+
+    .trainer-navbar.expanded .trainer-profile-info {
+        text-align: center;
+    }
+
+    .trainer-navbar.expanded .trainer-btn-logout {
+        width: 100%;
+    }
+
+}
+
+/* =========================================
+   TRAINING CARD ACTION LAYOUT
+========================================= */
+
+.tarjetaEntreno {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+}
+
+.tarjetaEntreno > div:first-child {
+    min-width: 0;
+}
+
+.tarjetaEntreno h5,
+.tarjetaEntreno p,
+.tarjetaEntreno small {
+    overflow-wrap: anywhere;
+}
+
+.tarjetaEntreno .trainer-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(46px, 1fr));
+    align-items: center;
+    justify-content: end;
+    gap: 8px;
+    width: 176px;
+    min-width: 176px;
+}
+
+.tarjetaEntreno .trainer-actions .btn {
+    min-height: 46px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.tarjetaEntreno .trainer-actions .trainer-action-main {
+    grid-column: 1 / -1;
+    width: auto;
+    min-width: 0;
+    padding: 0 12px !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.tarjetaEntreno .trainer-actions .trainer-action-icon {
+    width: 100%;
+    height: 46px;
+    padding: 0 !important;
+}
+
+@media (max-width: 1180px) {
+
+    .tarjetaEntreno {
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
+    }
+
+    .tarjetaEntreno .trainer-actions {
+        width: min(260px, 100%);
+        min-width: 0;
+        justify-content: start;
+    }
+
+    .tarjetaEntreno .trainer-actions .trainer-action-main {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .tarjetaEntreno .trainer-actions .trainer-action-icon {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .tarjetaEntreno .trainer-actions {
+        width: 100%;
+    }
+
+}

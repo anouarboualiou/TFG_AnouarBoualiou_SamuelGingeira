@@ -16,227 +16,8 @@
     <!-- Tus estilos -->
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="../styles/miEstilo.css">
-
-    <style>
-        /* 🔥 NAVBAR → SIDEBAR EN DESKTOP */
-        @media (min-width: 768px) {
-            .navbar-dashboard {
-                width: 280px;
-                height: 100vh;
-                position: fixed;
-                top: 0;
-                left: 0;
-                display: flex;
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            .navbar-dashboard .navbar-collapse {
-                display: flex !important;
-                flex-direction: column;
-            }
-
-            .navbar-dashboard .navbar-collapse {
-                flex: 1;
-            }
-
-            .navbar-dashboard .container-fluid {
-                height: 100%;
-            }
-
-            .navbar-dashboard .navbar-nav {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .main-content {
-                margin-left: 280px;
-                padding: 40px;
-                min-height: 100vh;
-
-            }
-        }
-
-        /* 📱 MÓVIL NORMAL */
-        @media (max-width: 767px) {
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-            }
-        }
-
-        .navbar-dashboard .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            transition: all 0.2s ease;
-        }
-
-        .navbar-dashboard .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.08);
-            color: white;
-            transform: translateX(6px);
-        }
-
-        .navbar-dashboard .nav-link.active {
-            background: linear-gradient(135deg, #64a19d, #3c3f3f);
-            color: white;
-            box-shadow: 0 4px 12px rgba(116, 116, 116, 0.4);
-        }
-
-        .tarjetaEntreno {
-            background: #dbdada;
-            border-radius: 10px;
-            box-shadow:
-                0 2px 6px rgba(0, 0, 0, 0.06),
-                0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            padding: 20px;
-        }
-
-        .tarjetaEntreno {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* 🔥 HOVER PRO */
-        .tarjetaEntreno:hover {
-            transform: translateY(-4px);
-            box-shadow:
-                0 6px 16px rgba(0, 0, 0, 0.1),
-                0 14px 32px rgba(0, 0, 0, 0.18);
-        }
-
-        .btnLogout {
-            transition: all .2s ease;
-            font-size: .95rem;
-        }
-
-        .btnLogout:hover {
-            color: white !important;
-            transform: translateX(4px);
-        }
-
-        .tarjeta-partido {
-
-            background: #dbdada;
-
-            border-radius: 20px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 4px 14px rgba(0, 0, 0, .08),
-                0 10px 30px rgba(0, 0, 0, .06);
-
-            transition: .25s ease;
-
-        }
-
-        .tarjeta-partido:hover {
-
-            transform: translateY(-4px);
-
-        }
-
-        .encabezado-partido {
-
-            position: relative;
-
-            padding: 42px 20px;
-
-            background-size: cover;
-
-            background-position: center;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: center;
-
-            justify-content: center;
-
-        }
-
-        .equipo {
-
-            font-size: 2rem;
-
-            font-weight: 800;
-
-            line-height: 1.1;
-
-        }
-
-        .vs {
-
-            font-size: 1.3rem;
-
-            font-weight: 900;
-
-            color: #64a19d;
-
-            margin: 6px 0;
-
-        }
-
-        .badgePartido {
-
-            position: absolute;
-
-            top: 16px;
-
-            right: 16px;
-
-        }
-
-        .info-partido {
-
-            padding: 24px;
-
-        }
-
-        .info-partido p {
-
-            margin-bottom: 12px;
-
-            font-size: 1rem;
-
-        }
-
-
-        .accionesPartido {
-
-            display: flex;
-
-            gap: 12px;
-
-            padding:
-                0 24px 24px;
-
-        }
-
-        .accionesPartido button {
-
-            flex: 1;
-
-            border: none;
-
-            padding: 12px;
-
-            font-weight: 700;
-
-            transition: .2s ease;
-
-            box-shadow:
-                0 4px 10px rgba(0, 0, 0, .08);
-
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/entrenadorDashboard.css">
+    
 
 </head>
 
@@ -246,108 +27,103 @@
 
     </div>
 
-    <!-- NAVBAR / SIDEBAR -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-black navbar-dashboard">
+    <!-- SIDEBAR / NAVBAR ENTRENADOR -->
 
-        <div class="container-fluid flex-md-column align-items-start h-100">
+<nav class="navbar navbar-expand-md navbar-dark bg-black trainer-navbar">
 
-            <a class="navbar-brand mb-md-4" href="#">BALLHUB</a>
+    <div class="container-fluid flex-md-column">
 
-            <div class="mb-4 text-white-50" id="infoEquipo">
+        <a class="trainer-logo" href="#">
+            <span class="trainer-logo-mobile">B</span>
+            <span class="trainer-logo-desktop">BALLHUB</span>
+        </a>
 
-                <small>
-                    Gestionando equipo
-                </small>
+        <button
+            class="navbar-toggler trainer-navbar-toggler ms-auto"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#trainerNavbar"
+            aria-controls="trainerNavbar"
+            aria-expanded="false"
+            aria-label="Abrir navegacion"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="fw-bold text-white" id="nombreEquipoSidebar">
+        <div class="collapse navbar-collapse trainer-navbar-collapse" id="trainerNavbar">
 
-                </div>
+            <div class="d-flex flex-column h-100 w-100">
 
+            <div class="text-white-50 trainer-sidebar-text" id="infoEquipo">
+                <small>Gestionando equipo</small>
+                <div class="fw-bold text-white" id="nombreEquipoSidebar"></div>
             </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <ul class="navbar-nav flex-md-column w-100 trainer-menu">
 
-            <div class="collapse navbar-collapse h-100" id="menu">
+                <li class="nav-item">
+                    <a class="trainer-link active" onclick="showSection('players', this)">
+                        <i class="bi bi-people"></i>
+                        <span class="trainer-sidebar-text">Jugadores</span>
+                    </a>
+                </li>
 
-                <ul class="navbar-nav flex-md-column w-100 h-100">
+                <li class="nav-item">
+                    <a class="trainer-link" onclick="showSection('trainings', this)">
+                        <i class="bi bi-activity"></i>
+                        <span class="trainer-sidebar-text">Entrenamientos</span>
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link active" onclick="showSection('players', this)">
-                            <i class="bi bi-people me-2"></i> Jugadores
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="trainer-link" onclick="showSection('matches', this)">
+                        <i class="bi bi-calendar-event"></i>
+                        <span class="trainer-sidebar-text">Partidos</span>
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="showSection('trainings', this)">
-                            <i class="bi bi-activity me-2"></i> Entrenamientos
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a class="trainer-link" onclick="showSection('news', this)">
+                        <i class="bi bi-newspaper"></i>
+                        <span class="trainer-sidebar-text">Noticias</span>
+                    </a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="showSection('matches', this)">
-                            <i class="bi bi-calendar-event me-2"></i> Partidos
-                        </a>
-                    </li>
+            </ul>
 
-                    <li class="nav-item">
-                        <a class="nav-link" onclick="showSection('news', this)">
-                            <i class="bi bi-newspaper me-2"></i> Noticias
-                        </a>
-                    </li>
+            <div class="trainer-logout-wrapper">
 
-                    <div class="mt-auto pt-4 pb-4  w-100">
-
-                        <!-- PERFIL -->
-                        <div class="d-flex align-items-center gap-3 mb-3 mb-4">
-
-                            <img id="fotoEntrenadorSidebar" src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                                width="55" height="55" style="
-                                border-radius:50%;
-                                object-fit:cover;
-                            ">
-
-                            <div>
-
-                                <div class="text-white fw-bold" id="nombreEntrenadorSidebar">
-
-                                </div>
-
-                                <small class="text-white-50 d-block" id="emailEntrenadorSidebar">
-
-                                </small>
-
-                            </div>
-
-                        </div>
-
-                        <!-- LOGOUT -->
-                        <button class="btn btn-sm border-0 p-0 d-flex align-items-center gap-2 btnLogout"
-                            style="color: rgb(133, 0, 0);" onclick="logout()">
-
-                            <i class="bi bi-box-arrow-right"></i>
-
-                            Cerrar sesión
-
-                        </button>
-
+                <!-- PERFIL -->
+                <div class="d-flex align-items-center gap-3 mb-4 trainer-profile">
+                    <span class="trainer-avatar">
+                        <img id="fotoEntrenadorSidebar"
+                            src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                            width="56" height="56"
+                            alt="Foto del entrenador">
+                    </span>
+                    <div class="trainer-profile-info trainer-sidebar-text">
+                        <small class="text-white-50 d-block" id="emailEntrenadorSidebar"></small>
                     </div>
+                </div>
 
+                <!-- LOGOUT -->
+                <button class="trainer-btn-logout" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span class="trainer-sidebar-text">Cerrar sesión</span>
+                </button>
 
-
-
-
-                </ul>
+            </div>
 
             </div>
 
         </div>
 
-    </nav>
+    </div>
+
+</nav>
 
     <!-- CONTENIDO -->
-    <div class="main-content p-4">
+    <div class="trainer-main p-4">
 
         <div class="container py-2">
 
@@ -387,21 +163,42 @@
             <!-- ENTRENAMIENTOS -->
             <section id="trainings" style="display:none;">
 
-                <h2>Asistencia a entrenamientos</h2>
+                <div class="container pb-4">
+                     <h4 class="mb-0">
+                        Asistencia a entrenamientos
+                    </h4>
+
+                    <small class="text-muted">
+                        Grafico de entrenamientos
+                    </small>
+
+                </div>
+
+               
 
                 <div class="contenedor-grafico">
                     <canvas id="graficoAsistencia"></canvas>
                 </div>
 
+                
+
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h3>Entrenamientos</h3>
+                    <div>
+                        <h4 class="mb-0">
+                            Entrenamientos
+                        </h4>
+
+                        <small class="text-muted">
+                            Gestión de entrenamientos
+                        </small>
+                    </div>
                     <button class="btn btn-primary" id="btnAniadirEntrenamiento" data-bs-toggle="modal" data-bs-target="#modalEntrenamiento">
                         <i class="bi bi-plus-circle me-2"></i>
                         Añadir Entrenamiento
                     </button>
                 </div>
 
-                <!-- 🔥 AQUI VAN LAS TARJETAS -->
+                <!-- AQUI VAN LAS TARJETAS -->
                 <div id="listaEntrenamientos"></div>
 
             </section>
@@ -467,9 +264,7 @@
 
                 </div>
 
-                <div class="row g-4" id="contenedorNoticias">
-
-                </div>
+                <div class="row g-4" id="contenedorNoticias"></div>
 
             </section>
 
@@ -538,6 +333,78 @@
     <script src="../scripts/Entrenador/noticias.js"></script>
     <script src="../scripts/Entrenador/grafico.js"></script>
     <script src="../scripts/Entrenador/entrenamientos.js"></script>
+
+    <script>
+
+        // Sidebar desktop y collapse movil
+const sidebar = document.querySelector('.trainer-navbar')
+const mainContent = document.querySelector('.trainer-main')
+const trainerNavbar = document.querySelector('#trainerNavbar')
+
+function expandSidebar(){
+
+    if(window.innerWidth >= 768){
+
+        sidebar.classList.add('expanded')
+        mainContent.classList.add('expanded')
+
+    }
+
+}
+
+function collapseSidebar(){
+
+    if(window.innerWidth >= 768){
+
+        sidebar.classList.remove('expanded')
+        mainContent.classList.remove('expanded')
+
+    }
+
+}
+
+function initTrainerSidebar(){
+
+    if(!sidebar || !mainContent){
+        return
+    }
+
+    sidebar.removeEventListener('mouseenter', expandSidebar)
+    sidebar.removeEventListener('mouseleave', collapseSidebar)
+
+    if(window.innerWidth >= 768){
+
+        sidebar.addEventListener('mouseenter', expandSidebar)
+        sidebar.addEventListener('mouseleave', collapseSidebar)
+
+    }else{
+
+        sidebar.classList.remove('expanded')
+        mainContent.classList.remove('expanded')
+
+    }
+
+}
+
+initTrainerSidebar()
+
+window.addEventListener('resize', initTrainerSidebar)
+
+document.querySelectorAll('.trainer-link').forEach(link => {
+
+    link.addEventListener('click', () => {
+
+        if(window.innerWidth < 768 && trainerNavbar && trainerNavbar.classList.contains('show')){
+
+            bootstrap.Collapse.getOrCreateInstance(trainerNavbar).hide()
+
+        }
+
+    })
+
+})
+
+</script>
     
 
 </body>

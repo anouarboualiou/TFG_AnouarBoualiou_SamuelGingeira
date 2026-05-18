@@ -103,11 +103,11 @@ function renderEntrenadores(entrenadores) {
                 </td>
 
                 <!-- ACCIONES -->
-                <td class="text-center">
+                <td class="text-center actions-cell">
 
                     <!-- CREDENCIALES -->
                     <button
-                        class="btn btn-primary px-3 py-3 btn-sm btn-credenciales"
+                        class="btn btn-primary btn-sm btn-credenciales"
                         data-id="${entrenador.id_entrenador}"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEntrenador">
@@ -118,7 +118,7 @@ function renderEntrenadores(entrenadores) {
 
                     <!-- ASIGNAR -->
                     <button
-                        class="btn btn-success btn-sm px-3 py-3 text-white btn-asignar-equipo"
+                        class="btn btn-success btn-sm text-white btn-asignar-equipo"
                         data-id="${entrenador.id_entrenador}"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEntrenador">
@@ -129,7 +129,7 @@ function renderEntrenadores(entrenadores) {
 
                     <!-- EDITAR -->
                     <button
-                        class="btn btn-warning px-3 py-3 btn-sm btn-editar-entrenador"
+                        class="btn btn-warning btn-sm btn-editar-entrenador"
                         data-id="${entrenador.id_entrenador}"
                         data-bs-toggle="modal"
                         data-bs-target="#modalEntrenador">
@@ -140,7 +140,7 @@ function renderEntrenadores(entrenadores) {
 
                     <!-- BORRAR -->
                     <button
-                        class="btn btn-danger btn-sm px-3 py-3 btn-borrar-entrenador"
+                        class="btn btn-danger btn-sm btn-borrar-entrenador"
                         data-id="${entrenador.id_entrenador}">
 
                         <i class="bi bi-trash"></i>
@@ -480,6 +480,11 @@ function abrirModalEditarEntrenador(boton) {
                     id="idEntrenadorEditar"
                     value="${entrenador.id_entrenador}">
 
+                <input
+                    type="hidden"
+                    id="idEquipoEntrenadorEditar"
+                    value="${entrenador.id_equipo || ''}">
+
                 <!-- NOMBRE -->
                 <div class="mb-3">
 
@@ -615,6 +620,12 @@ async function editarEntrenador() {
         )
         .value;
 
+    const id_equipo = document
+        .getElementById(
+            'idEquipoEntrenadorEditar'
+        )
+        .value || null;
+
     try {
 
         const res = await fetch(
@@ -634,6 +645,7 @@ async function editarEntrenador() {
                     nombre,
                     apellidos,
                     fecha_nacim,
+                    id_equipo,
                     foto_perfil
                 })
 

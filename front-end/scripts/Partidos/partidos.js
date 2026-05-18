@@ -44,13 +44,34 @@ async function cargarPartidos() {
 
     }
 
+    const contenedor = document.getElementById("listaPartidos")
 
+    contenedor.innerHTML = `
+
+        <div class="col-12 text-center py-5">
+
+            <div
+                class="spinner-border text-primary"
+                role="status">
+
+                <span class="visually-hidden">
+                    Cargando...
+                </span>
+
+            </div>
+
+            <p class="mt-3 text-muted">
+
+                Cargando partidos...
+
+            </p>
+
+        </div>
+
+    `
 
     const res = await fetch(url)
-
     const partidos = await res.json()
-
-
 
     // ORDEN FECHA FRONTEND
 
@@ -71,11 +92,20 @@ async function cargarPartidos() {
 
     })
 
-
-
-    const contenedor = document.getElementById("listaPartidos")
-
     contenedor.innerHTML = ""
+
+    // SI NO HAY NOTICIAS
+
+    if (partidos.length === 0) {
+
+        contenedor.innerHTML = `
+            <div class="col-12 text-center">
+                <p>No hay partidos disponibles</p>
+            </div>
+        `
+
+        return
+    }
 
 
 
@@ -85,105 +115,176 @@ async function cargarPartidos() {
 
         <div class="col-lg-6">
 
-            <article class="tarjeta-partido">
+            <article class="tarjeta-partido ${
 
-                <header 
-                    class="encabezado-partido text-center text-white bg-dark"
+    p.estado === 'finalizado'
 
-                    style="
-                        background-image:
-                        linear-gradient(
-                            rgba(0,0,0,0.5),
-                            rgba(0,0,0,0.7)
-                        ),
-                        url('${p.foto_campo || 'https://pbs.twimg.com/media/Fdkd_NLWAAE-big.png'}');
-                    ">
+        ?
 
+        p.goles_favor > p.goles_contra
+            ? 'victoria'
+            : p.goles_favor < p.goles_contra
+                ? 'derrota'
+                : 'empate'
+
+        :
+
+        ''
+
+}">
+
+    <header
+        class="encabezado-partido"
+
+        style="
+            background-image:
+            linear-gradient(
+                rgba(0,0,0,0.45),
+                rgba(0,0,0,0.75)
+            ),
+            url('${p.foto_campo ||
+                'https://images.unsplash.com/photo-1486286701208-1d58e9338013?q=80&w=1200&auto=format&fit=crop'
+            }');
+        ">
+
+        <div class="overlayResultado">
+
+            <div class="estadoPartido">
+
+                ${
+                    p.estado === 'finalizado'
+
+                        ?
+
+                        `
+                        <span class="badge bg-dark">
+                            FINALIZADO
+                        </span>
+                        `
+
+                        :
+
+                        `
+                        <span class="badge bg-warning text-dark">
+                            PRÓXIMAMENTE
+                        </span>
+                        `
+                }
+
+            </div>
+
+            <div class="equiposPartido">
+
+                <div class="equipoNombre">
+
+                    ${p.nombre_equipo}
+
+                </div>
+
+                <div class="resultadoCentral
                     ${p.estado === 'finalizado'
+                        ? 'resultado'
+                        : 'vs'
+                    }">
+
+                    ${
+                        p.estado === 'finalizado'
+                            ? `${p.goles_favor} - ${p.goles_contra}`
+                            : 'VS'
+                    }
+
+                </div>
+
+                <div class="equipoNombre">
+
+                    ${p.rival_nombre}
+
+                </div>
+
+            </div>
+
+            ${
+                p.estado === 'finalizado'
+
+                    ?
+
+                    `
+                    <div class="indicadorResultado">
+
+                        ${
+                            p.goles_favor > p.goles_contra
 
                                 ?
 
                                 `
-                            <span class="badge bg-success estado-partido">
-                                FINALIZADO
-                            </span>
-                        `
+                                <span class="pillResultado victoria">
+                                    Victoria
+                                </span>
+                                `
 
                                 :
 
-                                `
-                            <span class="badge bg-warning text-dark estado-partido">
-                                PENDIENTE
-                            </span>
-                        `
-                            }
+                                p.goles_favor < p.goles_contra
 
-                            <span class="equipo">
+                                    ?
 
-                                ${p.nombre_equipo}
+                                    `
+                                    <span class="pillResultado derrota">
+                                        Derrota
+                                    </span>
+                                    `
 
-                            </span>
+                                    :
 
-                            <span class="vs">
+                                    `
+                                    <span class="pillResultado empate">
+                                        Empate
+                                    </span>
+                                    `
+                        }
 
-                                VS
+                    </div>
+                    `
 
-                            </span>
+                    :
 
-                            <span class="equipo">
-
-                                ${p.rival_nombre}
-
-                            </span>
-
-                </header>
-
-                <div class="info-partido text-muted text-center">
-
-                    <p class="mt-3">
-
-                        <i class="bi bi-calendar3 text-primary me-2"></i>
-
-                        ${new Date(p.fecha_part).toLocaleDateString("es-ES")}
-
-                    </p>
-
-                    <p>
-
-                        <i class="bi bi-clock text-primary me-2"></i>
-
-                        ${p.hora_part?.slice(0, 5) || '--:--'}
-
-                    </p>
-
-                    <p>
-
-                        <i class="bi bi-geo-alt text-primary me-2"></i>
-
-                        ${p.rival_campo}
-
-                    </p>
-
-                    <p>
-
-                        <i class="bi bi-trophy text-primary me-2"></i>
-
-                        ${p.estado === 'finalizado'
-
-                ?
-
-                `${p.goles_favor} - ${p.goles_contra}`
-
-                :
-
-                'Pendiente'
+                    ''
             }
 
-                    </p>
+        </div>
 
-                </div>
+    </header>
 
-            </article>
+    <div class="info-partido text-muted text-center">
+
+        <p class="mt-3">
+
+            <i class="bi bi-calendar3 text-primary me-2"></i>
+
+            ${new Date(p.fecha_part)
+                .toLocaleDateString("es-ES")}
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-clock text-primary me-2"></i>
+
+            ${p.hora_part?.slice(0, 5) || '--:--'}
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-geo-alt text-primary me-2"></i>
+
+            ${p.rival_campo}
+
+        </p>
+
+    </div>
+
+</article>
 
         </div>
 

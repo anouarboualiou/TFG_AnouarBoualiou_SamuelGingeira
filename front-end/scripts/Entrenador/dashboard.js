@@ -1,9 +1,25 @@
 window.user = JSON.parse(localStorage.getItem('user'))
 
-document.getElementById('nombreEquipoSidebar').textContent = user.nombre_equipo || 'Sin equipo'
-document.getElementById('nombreEntrenadorSidebar').textContent = `${user.nombre} ${user.apellidos}`
-document.getElementById('emailEntrenadorSidebar').textContent = user.email
-document.getElementById('fotoEntrenadorSidebar').src = user.foto_perfil || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+const nombreEquipoSidebar = document.getElementById('nombreEquipoSidebar')
+const nombreEntrenadorSidebar = document.getElementById('nombreEntrenadorSidebar')
+const emailEntrenadorSidebar = document.getElementById('emailEntrenadorSidebar')
+const fotoEntrenadorSidebar = document.getElementById('fotoEntrenadorSidebar')
+
+if (nombreEquipoSidebar) {
+    nombreEquipoSidebar.textContent = user.nombre_equipo || 'Sin equipo'
+}
+
+if (nombreEntrenadorSidebar) {
+    nombreEntrenadorSidebar.textContent = `${user.nombre} ${user.apellidos}`
+}
+
+if (emailEntrenadorSidebar) {
+    emailEntrenadorSidebar.textContent = user.email
+}
+
+if (fotoEntrenadorSidebar) {
+    fotoEntrenadorSidebar.src = user.foto_perfil || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+}
 
 const token = localStorage.getItem('token')
 
@@ -30,7 +46,11 @@ window.addEventListener('pageshow', function (event) {
 function showSection(sectionId, element) {
     document.querySelectorAll("section").forEach(sec => sec.style.display = "none")
     document.getElementById(sectionId).style.display = "block"
-    document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"))
+    document.querySelectorAll(".trainer-link").forEach(link => {
+
+        link.classList.remove("active")
+
+    })
     element.classList.add("active")
 
     if (sectionId === "trainings") {

@@ -67,6 +67,16 @@ function renderPartidos(partidos) {
 
     contenedorPartidos.innerHTML = '';
 
+    if (partidos.length === 0) {
+        contenedorPartidos.innerHTML = `
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-calendar-event fs-1 text-muted"></i>
+                <p class="text-muted mt-3">No hay partidos registrados</p>
+            </div>
+        `;
+        return;
+    }
+
     partidos.forEach(partido => {
 
         const puedeFinalizar =
@@ -76,6 +86,23 @@ function renderPartidos(partidos) {
             ) &&
             partido.estado !== 'finalizado';
 
+        let resultadoClase = '';
+
+        if (partido.estado === 'finalizado') {
+
+            resultadoClase =
+                partido.goles_favor > partido.goles_contra
+                    ? 'victoria'
+                    : partido.goles_favor < partido.goles_contra
+                        ? 'derrota'
+                        : 'empate';
+        }
+
+        const resultadoTexto =
+            partido.estado === 'finalizado'
+                ? `${partido.goles_favor} - ${partido.goles_contra}`
+                : 'VS';
+
         contenedorPartidos.innerHTML += `
 
             <div class="col-12 col-xl-6">
@@ -83,61 +110,122 @@ function renderPartidos(partidos) {
                 <article class="tarjeta-partido">
 
                     <header
-                        class="encabezado-partido text-center text-white"
+                        class="encabezado-partido ${resultadoClase}"
 
                         style="
                             background-image:
                             linear-gradient(
-                                rgba(0,0,0,0.5),
-                                rgba(0,0,0,0.7)
+                                rgba(0,0,0,0.45),
+                                rgba(0,0,0,0.75)
                             ),
                             url('${partido.foto_campo ||
-            'https://pbs.twimg.com/media/Fdkd_NLWAAE-big.png'
-            }');
+                                'https://images.unsplash.com/photo-1486286701208-1d58e9338013?q=80&w=1200&auto=format&fit=crop'
+                            }');
                         ">
 
-                        <div class="badgePartido">
+                        <div class="overlayResultado">
 
-                            ${partido.estado === 'finalizado'
+                            <div class="estadoPartido">
 
-                ?
+                                ${
+                                    partido.estado === 'finalizado'
+                                        ?
 
-                `
-                                    <span class="badge bg-success">
-                                        FINALIZADO
-                                    </span>
-                                `
+                                        `
+                                        <span class="badge bg-dark">
+                                            FINALIZADO
+                                        </span>
+                                        `
 
-                :
+                                        :
 
-                `
-                                    <span class="badge bg-warning text-dark">
-                                        PENDIENTE
-                                    </span>
-                                `
-            }
+                                        `
+                                        <span class="badge bg-warning text-dark">
+                                            PRÓXIMAMENTE
+                                        </span>
+                                        `
+                                }
+
+                            </div>
+
+                            <div class="equiposPartido">
+
+                                <div class="equipoNombre">
+
+                                    ${user.nombre_equipo || 'Mi Equipo'}
+
+                                </div>
+
+                                <div class="resultadoCentral
+                                    ${partido.estado === 'finalizado'
+                                        ? 'resultado'
+                                        : 'vs'
+                                    }">
+
+                                    ${resultadoTexto}
+
+                                </div>
+
+                                <div class="equipoNombre">
+
+                                    ${partido.rival_nombre}
+
+                                </div>
+
+                            </div>
+
+                            ${
+                                partido.estado === 'finalizado'
+
+                                    ?
+
+                                    `
+                                    <div class="indicadorResultado">
+
+                                        ${
+                                            resultadoClase === 'victoria'
+
+                                                ?
+
+                                                `
+                                                <span class="pillResultado victoria">
+                                                    Victoria
+                                                </span>
+                                                `
+
+                                                :
+
+                                                resultadoClase === 'derrota'
+
+                                                    ?
+
+                                                    `
+                                                    <span class="pillResultado derrota">
+                                                        Derrota
+                                                    </span>
+                                                    `
+
+                                                    :
+
+                                                    `
+                                                    <span class="pillResultado empate">
+                                                        Empate
+                                                    </span>
+                                                    `
+                                        }
+
+                                    </div>
+                                    `
+
+                                    :
+
+                                    ''
+                            }
 
                         </div>
 
-                        <span class="equipo">
-
-                            BALLHUB
-
-                        </span>
-
-                        <span class="vs">
-
-                            VS
-
-                        </span>
-
-                        <span class="equipo">
-
-                            ${partido.rival_nombre}
-
-                        </span>
-
                     </header>
+                        
 
                     <div class="info-partido text-muted text-center">
 
@@ -162,96 +250,77 @@ function renderPartidos(partidos) {
                             <i class="bi bi-geo-alt text-primary me-2"></i>
 
                             ${partido.rival_campo ||
-            'Sin campo'
-            }
+                            'Sin campo'
+                            }
 
                         </p>
 
-                        <p>
-
-                            <i class="bi bi-trophy text-primary me-2"></i>
-
-                            ${partido.estado === 'finalizado'
-
-                ?
-
-                `
-                                    ${partido.goles_favor}
-                                    -
-                                    ${partido.goles_contra}
-                                `
-
-                :
-
-                'Sin resultado'
-            }
-
-                        </p>
+                        
 
                     </div>
 
                     <!-- BOTONES -->
                     <div class="accionesPartido">
-${partido.estado === 'finalizado'
+                        ${partido.estado === 'finalizado'
 
-                ?
+                                        ?
 
-                `
-        <button
-            class="btn btn-danger btn-sm text-white opacity-75"
-            disabled>
+                                        `
+                                <button
+                                    class="btn btn-danger btn-sm text-white opacity-75"
+                                    disabled>
 
-            Finalizado
+                                    Finalizado
 
-        </button>
-    `
+                                </button>
+                            `
 
-                :
+                                        :
 
-                puedeFinalizar
+                                        puedeFinalizar
 
-                    ?
+                                            ?
 
-                    `
-        <button
-            class="btn btn-success btn-sm text-white btn-resultado"
-            data-id="${partido.id_partido}">
+                                            `
+                                <button
+                                    class="btn btn-success btn-sm text-white btn-resultado"
+                                    data-id="${partido.id_partido}">
 
-            Resultado
+                                    Resultado
 
-        </button>
-    `
+                                </button>
+                            `
 
-                    :
+                                            :
 
-                    `
-        <button
-            class="btn btn-secondary btn-sm text-white opacity-75"
-            disabled>
+                                            `
+                                <button
+                                    class="btn btn-secondary btn-sm text-white opacity-75"
+                                    disabled>
 
-            Pendiente
+                                    Pendiente
 
-        </button>
-    `
-            }
+                                </button>
+                            `
+                                    }
 
-    <button
-        class="btn btn-warning btn-sm btn-editar-partido"
-        data-id="${partido.id_partido}">
+                            <button
+                                class="btn btn-warning btn-sm btn-editar-partido"
+                                data-id="${partido.id_partido}">
 
-        <i class="bi bi-pencil"></i>
+                                <i class="bi bi-pencil"></i>
 
-    </button>
+                            </button>
 
-    <button
-        class="btn btn-danger btn-sm btn-borrar-partido"
-        data-id="${partido.id_partido}">
+                            <button
+                                class="btn btn-danger btn-sm btn-borrar-partido"
+                                data-id="${partido.id_partido}">
 
-        <i class="bi bi-trash"></i>
+                                <i class="bi bi-trash"></i>
 
-    </button>
+                            </button>
 
-</div>
+                    </div>
 
                 </article>
 
@@ -364,22 +433,6 @@ function abrirModalCrearPartido() {
 
                     <label class="form-label">
 
-                        Temporada
-
-                    </label>
-
-                    <input
-                        type="text"
-                        id="temporadaPartido"
-                        class="form-control"
-                        placeholder="2025/2026">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-
                         Foto campo
 
                     </label>
@@ -456,16 +509,16 @@ function toggleCampoPartido() {
 
     if (select.value == '1') {
 
-        inputCampo.value = user.campo;
+        inputCampo.value = user.campo || '';
 
-        inputCampo.disabled = true;
+        inputCampo.readOnly = true;
 
     }
     else {
 
         inputCampo.value = '';
 
-        inputCampo.disabled = false;
+        inputCampo.readOnly = false;
 
     }
 
@@ -493,11 +546,6 @@ async function guardarPartido() {
         hora_part:
             document.getElementById(
                 'horaPartido'
-            ).value,
-
-        temporada:
-            document.getElementById(
-                'temporadaPartido'
             ).value,
 
         foto_campo:
@@ -874,20 +922,6 @@ function abrirModalEditarPartido(idPartido) {
                 <div class="mb-3">
 
                     <label class="form-label">
-                        Temporada
-                    </label>
-
-                    <input
-                        type="text"
-                        id="editTemporada"
-                        class="form-control"
-                        value="${partido.temporada || ''}">
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
                         Foto campo
                     </label>
 
@@ -1036,11 +1070,6 @@ async function actualizarPartido(idPartido, estado) {
         hora_part:
             document.getElementById(
                 'editHoraPartido'
-            ).value,
-
-        temporada:
-            document.getElementById(
-                'editTemporada'
             ).value,
 
         foto_campo:

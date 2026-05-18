@@ -1,3 +1,20 @@
+html,
+body{
+    min-height:100%;
+    margin:0;
+}
+
+body#internal-page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+body#internal-page .projects-section{
+    flex:1;
+}
+
+
 .logo-navbar {
   height: 120px;
   width: auto;
@@ -73,13 +90,16 @@
 
 
 .imagen-noticia {
-  position: relative;
+    position: relative;
+    height: 200px;        /* añade esto */
+    overflow: hidden;     /* añade esto */
+    background: #e0e0e0;  /* añade esto, color de fondo si no carga */
 }
 
 .imagen-noticia img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
 .categoria {
@@ -95,11 +115,13 @@
   padding: 20px;
   text-align: center;
   align-items: center;
+  min-height: 0;
 }
 
 .titulo-noticia {
   font-weight: 700;
   margin-bottom: 12px;
+  width: 100%;
 }
 
 .subtitulo-noticia {
@@ -115,6 +137,7 @@
 .texto-noticia {
   color: #6c757d;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .info-noticia {
@@ -124,10 +147,12 @@
   font-size: 0.85rem;
   color: #6c757d;
   margin-bottom: 15px;
+  flex-shrink: 0;
 }
 
 .contenido-noticia .btn {
   margin-top: auto;
+  flex-shrink: 0;
 }
 
 .about-section {
@@ -147,7 +172,7 @@
 }
 
 .dropdown-menu {
-  background-color: rgba(255, 255, 255, 0.13);
+  background-color: rgba(22, 22, 22, 0.795);
   /* fondo */
   border-radius: 10px;
 }
@@ -421,14 +446,14 @@
 #mainNav .nav-link {
   display: flex;
   align-items: center;
-  height: 100%;
+  /*height: 100%;*/
   position: relative;
 }
 
 #mainNav .nav-link.active::after {
   content: "";
   position: absolute;
-  bottom: -16px;
+  bottom: -28px;
   left: 0;
   width: 100%;
   height: 4px;
@@ -511,9 +536,13 @@ body {
 
     -webkit-box-orient: vertical;
 
-    min-height: 60px;
+    line-height: 1.25;
+
+    height: calc(1.25em * 2);
 
     word-break: break-word;
+
+    overflow-wrap: anywhere;
 
 }
 
@@ -529,9 +558,13 @@ body {
 
     -webkit-box-orient: vertical;
 
-    min-height: 75px;
+    line-height: 1.55;
+
+    height: calc(1.55em * 3);
 
     word-break: break-word;
+
+    overflow-wrap: anywhere;
 
 }
 
@@ -710,6 +743,195 @@ body {
 
         line-height: 1.8;
 
+    }
+
+}
+
+
+/*Cambios card partido*/
+.tarjeta-partido {
+
+  background: #dbdada;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  box-shadow:
+      0 4px 14px rgba(0, 0, 0, .08),
+      0 10px 30px rgba(0, 0, 0, .06);
+
+  transition: .25s ease;
+
+}
+
+.tarjeta-partido:hover{
+    transform:translateY(-2px);
+    
+}
+
+.encabezado-partido{
+    position:relative;
+    min-height:280px;
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.overlayResultado{
+    width:100%;
+    padding:28px;
+    color:white;
+}
+
+.estadoPartido{
+    position:absolute;
+    top:18px;
+    right:18px;
+}
+
+.equiposPartido{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-top:30px;
+    align-items:center;
+}
+
+.equipoNombre{
+    width:35%;
+    font-size:1.35rem;
+    font-weight:700;
+    text-align:center;
+    text-shadow:0 3px 10px rgba(0,0,0,.45);
+    line-height:1.3;
+    word-break:break-word;
+}
+
+.resultadoCentral{
+    min-width:160px;
+    text-align:center;
+    font-weight:900;
+    line-height:1;
+    text-shadow:0 5px 18px rgba(0,0,0,.55);
+    letter-spacing:2px;
+}
+
+.indicadorResultado{
+    margin-top:26px;
+    display:flex;
+    justify-content:center;
+}
+
+.pillResultado{
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    backdrop-filter:blur(10px);
+}
+
+.pillResultado.victoria{
+    background:#198754;
+    color:white;
+}
+
+.pillResultado.derrota{
+    background:#dc3545;
+    color:white;
+}
+
+.pillResultado.empate{
+    background:#6c757d;
+    color:white;
+}
+
+
+
+.info-partido{
+    padding:22px;
+}
+
+.info-partido p{
+    margin-bottom:10px;
+    font-size:.95rem;
+}
+
+.accionesPartido{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    padding:0 22px 22px;
+}
+
+.accionesPartido .btn{
+    border-radius:10px;
+    min-width:44px;
+    font-weight:600;
+}
+
+/* PARTIDO PENDIENTE */
+.resultadoCentral.vs{
+    font-size:3.2rem;
+}
+
+/* RESULTADO FINAL */
+.resultadoCentral.resultado{
+    font-size:4rem;
+    white-space:nowrap;
+}
+
+
+.equipoNombre{
+  width:28%;
+  font-size:1.15rem;
+  font-weight:700;
+  text-align:center;
+  text-shadow:0 3px 10px rgba(0,0,0,.45);
+  line-height:1.25;
+
+  word-break: normal;
+  overflow-wrap: normal;
+
+  white-space: normal;
+}
+
+.tarjetaEntreno {
+  background: #dbdada;
+  border-radius: 10px;
+  box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.06),
+      0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  padding: 20px;
+}
+
+.tarjetaEntreno {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.tarjetaEntreno:hover {
+  transform: translateY(-4px);
+  box-shadow:
+      0 6px 16px rgba(0, 0, 0, 0.1),
+      0 14px 32px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 991px){
+
+    .dropdown-menu{
+        background-color: transparent;
+        border: none;
+        padding-left: 1rem;
     }
 
 }

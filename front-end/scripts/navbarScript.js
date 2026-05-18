@@ -29,12 +29,15 @@ window.addEventListener('DOMContentLoaded', event => {
     // Cerrar menú en móvil
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
+        document.querySelectorAll('#navbarResponsive .nav-link:not(.dropdown-toggle)')
     );
 
     navItems.map(item => {
         item.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+            if (
+                navbarToggler &&
+                window.getComputedStyle(navbarToggler).display !== 'none'
+            ) {
                 navbarToggler.click();
             }
         });
