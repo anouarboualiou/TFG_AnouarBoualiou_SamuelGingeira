@@ -88,11 +88,11 @@ app.use((req, res, next) => {
     next();
 });
 
+/*
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log('Servidor iniciado')
     })
 }
-
+*/
 module.exports = app
-module.exports.default = app;
