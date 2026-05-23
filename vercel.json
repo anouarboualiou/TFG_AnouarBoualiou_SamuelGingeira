@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "BALLHUB-API/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "BALLHUB-API/app.js"
+    },
+
+    {
+      "handle": "filesystem"
+    },
+
+    {
+      "src": "/",
+      "dest": "/front-end/index.html"
+    },
+
+    {
+      "src": "/login",
+      "dest": "/front-end/Paginas/inicioSesion.html"
+    },
+
+    {
+      "src": "/dashboard",
+      "dest": "/front-end/Paginas/dashboard.html"
+    },
+
+    {
+      "src": "/superadmin",
+      "dest": "/front-end/Paginas/dashboardSuperadmin.html"
+    },
+
+    {
+      "src": "/partidos",
+      "dest": "/front-end/Paginas/partidos.html"
+    },
+
+    {
+      "src": "/noticias",
+      "dest": "/front-end/Paginas/noticias.html"
+    },
+
+    {
+      "src": "/(.*)",
+      "dest": "/front-end/$1"
+    }
+  ]
+}
